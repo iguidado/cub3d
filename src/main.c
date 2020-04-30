@@ -6,25 +6,11 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2020/04/29 02:05:42 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/05/01 00:19:10 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_img	ft_do_img(t_config *cfg, void *mlx_ptr)
-{
-	t_img	img;
-	int		bpp;
-	int		linelen;
-	int		endian;
-
-	setbuf(stdout, NULL);
-	img.img_ptr = mlx_new_image(mlx_ptr, cfg->screen_width, cfg->screen_height);
-	img.img_data = mlx_get_data_addr(img.img_ptr, &bpp, &linelen, &endian);
-	printf("|bpp = %i|linelen = %i|endian = %i|", bpp, linelen, endian);
-	return (img);
-}
 
 void	ft_fill_screen(t_config *cfg, t_img *img, t_ray_x *ray)
 {
@@ -54,52 +40,98 @@ void	ft_fill_screen(t_config *cfg, t_img *img, t_ray_x *ray)
 	}
 }
 
-void	ft_raycast(t_config *cfg, t_player *one, t_img *img)
+int		ft_raycast(void *param)
 {
-	t_ray_x	ray;
-	int		wall_hitted;
+	t_ray_x		ray;
+	t_prm_pkg	*cub;
+	int			wall_hitted;
 
 	ray.x = 0;
-	while (ray.x < cfg->screen_width)
+	cub = (t_prm_pkg *)param;
+	while (ray.x < cub->cfg->screen_width)
 	{
-		ray.angle = (one->angle - one->fov / 2.0f) + ((float)ray.x / (float)cfg->screen_width) * one->fov;
+		ray.angle = (cub->one->angle - cub->one->fov / 2.0f) + ((float)ray.x / (float)cub->cfg->screen_width) * cub->one->fov;
 		ray.eye_x = sin(ray.angle);
 		ray.eye_y = cos(ray.angle);
-		printf("\t|%3f|%3f|\t", ray.eye_y, ray.eye_x);
 		wall_hitted = 0;
 		ray.len = 0.0f;
 		while (!wall_hitted)
 		{
 			ray.len += 0.01f;
-			ray.test_x = (int)(one->x + ray.eye_x * ray.len);
-			ray.test_y = (int)(one->y + ray.eye_y * ray.len);
-			if (cfg->map[ray.test_y][ray.test_x] == '1')
+			ray.test_x = (int)(cub->one->x + ray.eye_x * ray.len);
+			ray.test_y = (int)(cub->one->y + ray.eye_y * ray.len);
+			if (cub->cfg->map[ray.test_y][ray.test_x] == '1')
 				wall_hitted++;
 		}
-		ft_fill_screen(cfg, img, &ray);
+		ft_fill_screen(cub->cfg, cub->img, &ray);
 		ray.x++;
 	}
+	return (0);
+}
+
+int		ft_move_player(int keycode, void *param)
+{
+	t_prm_pkg *cub;
+	
+	cub = (t_prm_pkg *)param;
+/*
+**	if (keycode == KEY_W)
+**	{
+**		cub->one->x = cub->one->x + cos(cub->one->angle) * 2.0f;
+**		cub->one->y = cub->one->y + sin(cub->one->angle) * 2.0f;
+**	}
+**	if (keycode == KEY_A)
+**	{
+**		cub->one->x = cub->one->x + cos(cub->one->angle * M_PI * 1.0f);
+**		cub->one->y = cub->one->y + sin(cub->one->angle * M_PI * 1.0f);
+**	}
+**	if (keycode == KEY_S)
+**	{
+**		cub->one->x = cub->one->x + cos(cub->one->angle * M_PI);
+**		cub->one->y = cub->one->y + sin(cub->one->angle * M_PI);
+**	//cub->one->x = cub->one->x - cos(cub->one->angle);
+**	//cub->one->y = cub->one->y - sin(cub->one->angle);
+**	}
+**	if (keycode == KEY_D)
+**	{
+**		cub->one->x = cub->one->x + cos(cub->one->angle * M_PI * 1.5f);
+**		cub->one->y = cub->one->y + sin(cub->one->angle * M_PI * 1.5f);
+**	}
+*/
+	if (keycode == KEY_LEFT)
+	{
+	ft_putnbr(keycode);
+	ft_putchar('\n');
+		cub->one->angle -= 0.3f;
+	}
+	if (keycode == KEY_RIGHT)
+	{
+	ft_putnbr(keycode);
+	ft_putchar('\n');
+		cub->one->angle += 0.3f;
+	}
+	ft_raycast(param);
+	mlx_put_image_to_window(cub->img->mlx_ptr, cub->img->win_ptr, cub->img->img_ptr, 0, 0);
+	return (0);
 }
 
 void	ft_launch_game(t_config cfg)
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
 	t_player		one;
 	t_img			img;
+	t_prm_pkg		pkg;
 
 	one = ft_preset_player(&cfg);
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, cfg.screen_width, cfg.screen_height, "cub3d");
-	img = ft_do_img(&cfg, mlx_ptr);
-	ft_raycast(&cfg, &one, &img);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, img.img_ptr, 0, 0);
-	//mlx_loop(mlx_ptr);
-	while (1)
-		;
-	mlx_destroy_image(mlx_ptr, img.img_ptr);
-	mlx_destroy_window(mlx_ptr, win_ptr);
-	free(mlx_ptr);
+	img = ft_preset_img(&cfg);
+	pkg = ft_pkg_param(&cfg, &img, &one);
+	ft_raycast((void *)&pkg);
+	mlx_put_image_to_window(img.mlx_ptr, img.win_ptr, img.img_ptr, 0, 0);
+	mlx_hook(img.win_ptr, 2, 1, ft_move_player, &pkg);
+//	mlx_loop_hook(img.mlx_ptr, ft_raycast, &pkg);
+	mlx_loop(img.mlx_ptr);
+	mlx_destroy_image(img.mlx_ptr, img.img_ptr);
+	mlx_destroy_window(img.mlx_ptr, img.win_ptr);
+	free(img.mlx_ptr);
 }
 
 int		main(int ac, char **av)
@@ -107,7 +139,7 @@ int		main(int ac, char **av)
 
 	t_file_data		fdata;
 	t_config		setup_cfg;
-	
+
 	fdata = ft_preset_fdata(ac, av);
 	setup_cfg = ft_get_config(&fdata);
 	ft_add_map(&setup_cfg, &fdata);

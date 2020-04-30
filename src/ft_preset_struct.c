@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2020/04/29 01:52:20 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/05/01 00:13:18 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,27 @@ t_player		ft_preset_player(t_config *cfg)
 	new.fov = FOV;
 	return (new);
 }
+
+t_img		ft_preset_img(t_config *cfg)
+{
+	t_img new;
+	int		bpp;
+	int		linelen;
+	int		endian;
+
+	new.mlx_ptr = mlx_init();
+	new.win_ptr = mlx_new_window(new.mlx_ptr, cfg->screen_width, cfg->screen_height, "cub3d");
+	new.img_ptr = mlx_new_image(new.mlx_ptr, cfg->screen_width, cfg->screen_height);
+	new.img_data = mlx_get_data_addr(new.img_ptr, &bpp, &linelen, &endian);
+	return (new);
+}
+
+t_prm_pkg	ft_pkg_param(t_config *cfg, t_img *img, t_player *one)
+{
+	t_prm_pkg new;
+
+	new.cfg = cfg;
+	new.img = img;
+	new.one = one;
+	return (new);
+} 

@@ -6,8 +6,6 @@
 # include "mlx.h"
 
 
-# include "key.h"
-
 //# include "manage_error.h"
 # include <stdlib.h>
 # include <fcntl.h>
@@ -29,23 +27,61 @@
 # define ID_NB 8
 # define FOV M_PI / 4.0f
 
+# define KEY_W 122
+# define KEY_A 113
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65363 
+# define KEY_RIGHT 65361
+# define KEY_ESC 65307
+
+enum
+{
+	FLAG_RES = 1,
+	FLAG_CEIL = 2,
+	FLAG_FLOOR = 4,
+	FLAG_NO = 8,
+	FLAG_SO = 16,
+	FLAG_WE = 32,
+	FLAG_EA = 64,
+	FLAG_SPRI = 128
+};
+
 typedef	struct	s_dot
 {
 	int x;
 	int y;
 }				t_dot;
 
-typedef struct	s_img
-{
-	void *img_ptr;
-	char *img_data;
-}				t_img;
-
 typedef struct	s_spawn
 {
 	struct s_dot	pos;
 	float			angle;
 }				t_spawn;
+
+typedef struct	s_config
+{
+	unsigned char	mask;
+	int				screen_width;
+	int				screen_height;
+	int				ceilar_color;
+	int				floor_color;
+	char			*no_text;
+	char			*so_text;
+	char			*ea_text;
+	char			*we_text;
+	char			*spri_text;
+	t_spawn			spwn;
+	char			**map;
+}				t_config;
+
+typedef struct	s_img
+{
+	void *mlx_ptr;
+	void *win_ptr;
+	void *img_ptr;
+	char *img_data;
+}				t_img;
 
 typedef	struct	s_player
 {
@@ -66,33 +102,12 @@ typedef	struct	s_ray_x
 	int		test_y;
 }				t_ray_x;
 
-enum
+typedef struct	s_prm_pkg
 {
-	FLAG_RES = 1,
-	FLAG_CEIL = 2,
-	FLAG_FLOOR = 4,
-	FLAG_NO = 8,
-	FLAG_SO = 16,
-	FLAG_WE = 32,
-	FLAG_EA = 64,
-	FLAG_SPRI = 128
-};
-
-typedef struct	s_config
-{
-	unsigned char	mask;
-	int				screen_width;
-	int				screen_height;
-	int				ceilar_color;
-	int				floor_color;
-	char			*no_text;
-	char			*so_text;
-	char			*ea_text;
-	char			*we_text;
-	char			*spri_text;
-	t_spawn			spwn;
-	char			**map;
-}				t_config;
+	t_config	*cfg;
+	t_img		*img;
+	t_player	*one;
+}				t_prm_pkg;
 
 /*
 **	Structure for games
@@ -177,6 +192,8 @@ int			ft_get_floor(t_config *cfg, t_file_data *fdata);
 t_config	ft_preset_config(void);
 t_file_data	ft_preset_fdata(int ac, char **av);
 t_player	ft_preset_player(t_config *cfg);
+t_img		ft_preset_img(t_config *cfg);
+t_prm_pkg	ft_pkg_param(t_config *cfg, t_img *img, t_player *one);
 
 /*
 **	Str analysis : parse_utils
@@ -204,7 +221,6 @@ void		ft_wipe_file_data(t_file_data *data);
 /*
 **	Manage error
 */
-
 
 void		ft_print_error_file(int errnum, t_config *cfg, t_file_data *fdata);
 void		ft_print_error_id(int errnum, t_config *cfg, t_file_data *fdata);
