@@ -65,17 +65,36 @@ t_player		ft_preset_player(t_config *cfg)
 	return (new);
 }
 
+t_text		ft_load_text(t_img *img, char *text_name)
+{
+	t_text new;
+	int	endian;
+	int	bpp;
+	int	line_size;
+
+
+	new.ptr = mlx_xpm_file_to_image(img->mlx_ptr, text_name, &new.width, &new.height);
+	new.data = mlx_get_data_addr(new.ptr, &bpp, &line_size, &endian);
+	printf("load %s : width = %i height = %i\n", text_name, new.width, new.height);
+	return (new);
+}
+
 t_img		ft_preset_img(t_config *cfg)
 {
-	t_img new;
-	int		bpp;
-	int		linelen;
-	int		endian;
+	t_img	new;
+	int	bpp;
+	int	linelen;
+	int	endian;
 
 	new.mlx_ptr = mlx_init();
 	new.win_ptr = mlx_new_window(new.mlx_ptr, cfg->screen_width, cfg->screen_height, "cub3d");
 	new.img_ptr = mlx_new_image(new.mlx_ptr, cfg->screen_width, cfg->screen_height);
 	new.img_data = mlx_get_data_addr(new.img_ptr, &bpp, &linelen, &endian);
+	new.no_text = ft_load_text(&new, cfg->no_text);
+	new.so_text = ft_load_text(&new, cfg->so_text);
+	new.ea_text = ft_load_text(&new, cfg->ea_text);
+	new.we_text = ft_load_text(&new, cfg->we_text);
+	new.spri_text = ft_load_text(&new, cfg->spri_text);
 	return (new);
 }
 

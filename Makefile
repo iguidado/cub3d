@@ -54,7 +54,7 @@ CC = clang
 WFLAG = -Wall -Werror -Wall
 DFLAG = -g3 -fsanitize=address
 INC_OBJ = -I$(D_INC) -I$(D_MLX) -I$(D_LIB)/include -I$(D_GNL)
-INC_FLAG = $(INC_OBJ) -lXext -lX11
+INC_FLAG = $(INC_OBJ) -lXext -lX11 -lbsd
 FLAGS = $(WFLAG) $(DFLAG)
 
 all : $(NAME)
@@ -75,9 +75,14 @@ $(N_GNL) : $(D_GNL)
 	make -C $(D_GNL)
 
 clean :
+	make clean -C $(D_LIB)
+	make clean -C $(D_MLX)
+	make clean -C $(D_GNL)
 	rm -rf $(P_OBJ)
 
 fclean : clean
+	make fclean -C $(D_LIB)
+	make fclean -C $(D_GNL)
 	rm -rf $(NAME)
 
 re : fclean all

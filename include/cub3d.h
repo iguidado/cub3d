@@ -27,8 +27,8 @@
 # define ID_NB 8
 # define FOV M_PI / 4.0f
 
-# define KEY_W 122
-# define KEY_A 113
+# define KEY_W 119
+# define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
 # define KEY_LEFT 65363 
@@ -53,6 +53,12 @@ typedef	struct	s_dot
 	int y;
 }				t_dot;
 
+typedef struct	s_fdot
+{
+	float x;
+	float y;
+}		t_fdot;
+
 typedef struct	s_spawn
 {
 	struct s_dot	pos;
@@ -75,13 +81,6 @@ typedef struct	s_config
 	char			**map;
 }				t_config;
 
-typedef struct	s_img
-{
-	void *mlx_ptr;
-	void *win_ptr;
-	void *img_ptr;
-	char *img_data;
-}				t_img;
 
 typedef	struct	s_player
 {
@@ -101,6 +100,37 @@ typedef	struct	s_ray_x
 	int		test_x;
 	int		test_y;
 }				t_ray_x;
+
+typedef struct s_text
+{
+	void	*ptr;
+	char	*data;
+	int	width;
+	int	height;
+}		t_text;
+
+typedef struct	s_block
+{
+	t_dot	pos;
+	t_fdot	midpoint;
+	t_fdot	hitpoint;
+	float	test_angle;
+	float	sample_x;
+	t_text	*wall_text;
+}		t_block;
+
+typedef struct	s_img
+{
+	void *mlx_ptr;
+	void *win_ptr;
+	void *img_ptr;
+	char *img_data;
+	t_text no_text;
+	t_text so_text;
+	t_text ea_text;
+	t_text we_text;
+	t_text spri_text;
+}				t_img;
 
 typedef struct	s_prm_pkg
 {
@@ -129,8 +159,8 @@ typedef struct	s_prm_pkg
 typedef	struct	s_file_data
 {
 	char	*name;
-	int		fd;
-	int		line_nb;
+	int	fd;
+	int	line_nb;
 	char	*line;
 	char	**paramlist;
 }				t_file_data;
@@ -186,6 +216,10 @@ int			ft_get_ceilar(t_config *cfg, t_file_data *fdata);
 int			ft_get_floor(t_config *cfg, t_file_data *fdata);
 
 /*
+**
+*/
+
+/*
 **	Set Structure
 */
 
@@ -194,6 +228,7 @@ t_file_data	ft_preset_fdata(int ac, char **av);
 t_player	ft_preset_player(t_config *cfg);
 t_img		ft_preset_img(t_config *cfg);
 t_prm_pkg	ft_pkg_param(t_config *cfg, t_img *img, t_player *one);
+t_text		ft_load_text(t_img *img, char *text_name);
 
 /*
 **	Str analysis : parse_utils
