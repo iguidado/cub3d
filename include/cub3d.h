@@ -1,12 +1,15 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft.h"
-# include "get_next_line.h"
-# include "mlx.h"
-
-
+# include "parse_cub.h"
+//# include "exit_game.h"
 //# include "manage_error.h"
+
+
+/*
+** Authorized library
+*/
+
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -14,18 +17,14 @@
 # include <unistd.h>
 # include <math.h>
 
+# include "libft.h"
+# include "get_next_line.h"
+# include "mlx.h"
+
 /*
 ** Il faut séparé le fichier .h en plusieur fichier 1 pour le parsing
 ** du fichier 1 autre pour les erreur aka (escape_bin) 
 */
-
-# define TILES " 102NESW"
-# define WALLS "1"
-# define INTERIOR "02NESW"
-# define SPAWN "NESW"
-# define EXTERIOR " "
-# define ID_NB 8
-# define FOV M_PI / 4.0f
 
 # define KEY_W 119
 # define KEY_A 97
@@ -35,23 +34,11 @@
 # define KEY_RIGHT 65361
 # define KEY_ESC 65307
 
-enum
-{
-	FLAG_RES = 1,
-	FLAG_CEIL = 2,
-	FLAG_FLOOR = 4,
-	FLAG_NO = 8,
-	FLAG_SO = 16,
-	FLAG_WE = 32,
-	FLAG_EA = 64,
-	FLAG_SPRI = 128
-};
+# define FOV M_PI / 4.0f
 
-typedef	struct	s_dot
-{
-	int x;
-	int y;
-}				t_dot;
+/*
+**	Structure for games
+*/
 
 typedef struct	s_fdot
 {
@@ -59,28 +46,32 @@ typedef struct	s_fdot
 	float y;
 }		t_fdot;
 
-typedef struct	s_spawn
+typedef struct	s_pos_lst
 {
-	struct s_dot	pos;
-	float			angle;
-}				t_spawn;
+	t_fdot				pos;
+	struct s_pos_lst	*next;
+}		t_pos_lst;
 
-typedef struct	s_config
+typedef struct s_text
 {
-	unsigned char	mask;
-	int				screen_width;
-	int				screen_height;
-	int				ceilar_color;
-	int				floor_color;
-	char			*no_text;
-	char			*so_text;
-	char			*ea_text;
-	char			*we_text;
-	char			*spri_text;
-	t_spawn			spwn;
-	char			**map;
-}				t_config;
+	void	*ptr;
+	char	*data;
+	int	width;
+	int	height;
+}		t_text;
 
+typedef struct	s_img
+{
+	void *mlx_ptr;
+	void *win_ptr;
+	void *img_ptr;
+	char *img_data;
+	t_text no_text;
+	t_text so_text;
+	t_text ea_text;
+	t_text we_text;
+	t_text spri_text;
+}				t_img;
 
 typedef	struct	s_player
 {
@@ -101,13 +92,9 @@ typedef	struct	s_ray_x
 	int		test_y;
 }				t_ray_x;
 
-typedef struct s_text
-{
-	void	*ptr;
-	char	*data;
-	int	width;
-	int	height;
-}		t_text;
+/*
+**	No need to clean block since wall_text is part of t_img
+*/
 
 typedef struct	s_block
 {
@@ -119,29 +106,13 @@ typedef struct	s_block
 	t_text	*wall_text;
 }		t_block;
 
-typedef struct	s_img
-{
-	void *mlx_ptr;
-	void *win_ptr;
-	void *img_ptr;
-	char *img_data;
-	t_text no_text;
-	t_text so_text;
-	t_text ea_text;
-	t_text we_text;
-	t_text spri_text;
-}				t_img;
-
 typedef struct	s_prm_pkg
 {
 	t_config	*cfg;
 	t_img		*img;
 	t_player	*one;
+	t_pos_lst	*obj_lst;
 }				t_prm_pkg;
-
-/*
-**	Structure for games
-*/
 
 /*
 **typedef struct	s_game2d
@@ -152,99 +123,39 @@ typedef struct	s_prm_pkg
 */
 
 /*
-** Temporary structure for processing .cub file
-**	Don't try to free(name) as it is an argument so it's on the stack
-*/
-
-typedef	struct	s_file_data
-{
-	char	*name;
-	int	fd;
-	int	line_nb;
-	char	*line;
-	char	**paramlist;
-}				t_file_data;
-
-/*
-** errnum for exit/error call
-*/
-
-enum
-{
-	ERROR_SYSCALL, 
-	ERROR_FILE_END, ERROR_MISS_CONF,
-	ERROR_DUPLICATE, ERROR_ID,
-	ERROR_LEXICAL, ERROR_SYNTAX, 
-	ERROR_MAP_PLAYER_SPAWN, ERROR_MAP_EMPTY_LINE, 
-	ERROR_MAP_OPEN_BOUNDARIES, ERROR_MAP_BAD_TILE,
-	NB_OF_ERROR_FROM_CFG
-};
-
-/*
-** Parsing function
-*/
-
-t_config	ft_parse_cub(int ac, char **av);
-t_config	ft_get_config(t_file_data *fdata);
-int			ft_get_fd(int ac, char **av);
-int			ft_get_next_param(t_file_data *fdata);
-int			ft_fdata_to_cfg(t_config *cfg, t_file_data *fdata);
-
-/*
-**	Get map
-*/
-
-void		ft_add_map(t_config *cfg, t_file_data *fdata);
-int			ft_get_file(int fd, char **line);
-
-/*
-** Get texture
-*/
-
-int			ft_get_no_text(t_config *cfg, t_file_data *fdata);
-int			ft_get_so_text(t_config *cfg, t_file_data *fdata);
-int			ft_get_ea_text(t_config *cfg, t_file_data *fdata);
-int			ft_get_we_text(t_config *cfg, t_file_data *fdata);
-int			ft_get_spri_text(t_config *cfg, t_file_data *fdata);
-
-/*
-**	Get num value
-*/
-
-int			ft_get_res(t_config *cfg, t_file_data *fdata);
-int			ft_get_ceilar(t_config *cfg, t_file_data *fdata);
-int			ft_get_floor(t_config *cfg, t_file_data *fdata);
-
-/*
-**
-*/
-
-/*
 **	Set Structure
 */
 
-t_config	ft_preset_config(void);
 t_file_data	ft_preset_fdata(int ac, char **av);
-t_player	ft_preset_player(t_config *cfg);
-t_img		ft_preset_img(t_config *cfg);
-t_prm_pkg	ft_pkg_param(t_config *cfg, t_img *img, t_player *one);
-t_text		ft_load_text(t_img *img, char *text_name);
+t_config	ft_preset_config(void);
+t_prm_pkg	ft_pkg_prm(t_config *cfg, t_img *img, t_player *pl, t_pos_lst **obj);
 
 /*
-**	Str analysis : parse_utils
+**	Load game
 */
 
-int			ft_line_is_empty(char *line);
-int			ft_line_is_map(char *line);
-int			ft_count_param(char **param);
-int			ft_str_isdigit(char *str);
-int			ft_str_is_colorcode(char *str);
+t_img		ft_preset_img(t_config *cfg);
+t_text		ft_load_text(t_img *img, char *text_name);
+t_player	ft_preset_player(t_config *cfg);
+t_pos_lst	*ft_load_obj(t_obj_spwn *obj_list);
+
+/*
+**	Render the game aka img.data
+**	manipulation and raycasting 
+*/
+
+int			ft_render_screen(void *param);
+void		ft_raycasting(t_prm_pkg *cub);
+int			ft_raycast(t_prm_pkg *cub, t_ray_x *ray);
+void		ft_fill_height_void(t_config *cfg, t_img *img, t_ray_x *ray);
+void		ft_fill_height(t_prm_pkg *cub, t_ray_x *ray, t_block *block);
 
 /*
 ** Utils
 */
 
 int			ft_strequ(char *str1, char *str2);
+char		*wrap_mlx_get_addr_data(void *img_ptr);
 
 /*
 **	clean data struct
@@ -252,22 +163,34 @@ int			ft_strequ(char *str1, char *str2);
 
 void		ft_wipe_cfg(t_config *cfg);
 void		ft_wipe_file_data(t_file_data *data);
+void		ft_wipe_obj_spwn(t_obj_spwn **obj_lst);
 
 /*
 **	Manage error
 */
 
+void		ft_manage_parse_error(int errnu, t_config *cfg, t_file_data *fdata);
 void		ft_print_error_file(int errnum, t_config *cfg, t_file_data *fdata);
 void		ft_print_error_id(int errnum, t_config *cfg, t_file_data *fdata);
 void		ft_print_error_token(int errnum, t_config *cfg, t_file_data *fdata);
-void		ft_print_error_map(int	errnum, t_config *cfg, t_file_data *fdata);
-void		ft_manage_parse_error(int errnum, t_config *cfg, t_file_data *data);
+void		ft_print_error_map(int errnum, t_config *cfg, t_file_data *fdata);
 
 /*
-**	test function
+**	ft_manage_block
 */
 
-void		ft_print_cfg(t_config *cfg);
+
+t_block		ft_get_block(t_config *cfg, t_ray_x *ray, t_player *one);
+void		ft_add_wall_to_block(t_img *img, t_block *block);
+int			ft_get_wall_pixel(float sample_y, t_block *block);
+float		ft_get_sample_y(int i, int scrn_width, int ceiling, int floor);
+
+/*
+**	ft_print_data
+*/
+
 void		ft_print_fdata(t_file_data *fdata);
+void		ft_print_cfg(t_config *cfg);
+void		ft_print_obj(t_obj_spwn *obj_list);
 
 #endif

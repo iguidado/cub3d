@@ -17,6 +17,9 @@ N_SRC = main.c\
 		ft_get_num_value.c\
 		ft_get_texture.c\
 		ft_add_map.c\
+		ft_map_analysis.c\
+		ft_load_game.c\
+		ft_manage_block.c\
 		ft_manage_error.c\
 		ft_unit_test.c\
 		ft_wipe.c
@@ -25,7 +28,9 @@ N_SRC = main.c\
 
 N_OBJ = $(N_SRC:.c=.o)
 
-N_HDR = cub3d.h
+N_HDR = cub3d.h\
+	parse_cub.h
+
 N_HDR_MLX = mlx.h
 N_HDR_LIB = libft.h
 N_HDR_GNL = get_next_line.h
@@ -44,7 +49,7 @@ P_MLX = $(D_MLX)/$(N_MLX)
 P_GNL = $(D_GNL)/$(N_GNL)
 P_SRC = $(addprefix $(D_SRC)/, $(N_SRC))
 P_OBJ = $(P_SRC:.c=.o)
-P_INC = $(D_INC)/$(N_HDR)\
+P_INC = $(addprefix $(D_INC)/, $(N_HDR))\
 		$(D_LIB)/include/$(N_HDR_LIB)\
 		$(D_MLX)/$(N_HDR_MLX)\
 		$(D_GNL)/$(N_HDR_GNL)

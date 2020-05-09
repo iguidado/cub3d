@@ -6,34 +6,13 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/01 00:13:18 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/05/09 18:50:31 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_config		ft_preset_config(void)
-{
-	t_config new;
-
-	new.mask = 0;
-	new.screen_width = -1;
-	new.screen_height = -1;
-	new.ceilar_color = -1;
-	new.floor_color = -1;
-	new.no_text = NULL;
-	new.so_text = NULL;
-	new.ea_text = NULL;
-	new.we_text = NULL;
-	new.spri_text = NULL;
-	new.spwn.pos.x = -1;
-	new.spwn.pos.y = -1;
-	new.spwn.angle = -1;
-	new.map = NULL;
-	return (new);
-}
-
-t_file_data		ft_preset_fdata(int ac, char **av)
+t_file_data	ft_preset_fdata(int ac, char **av)
 {
 	t_file_data fdata;
 
@@ -54,7 +33,29 @@ t_file_data		ft_preset_fdata(int ac, char **av)
 	return (fdata);
 }
 
-t_player		ft_preset_player(t_config *cfg)
+t_config	ft_preset_config(void)
+{
+	t_config new;
+
+	new.mask = 0;
+	new.screen_width = -1;
+	new.screen_height = -1;
+	new.ceilar_color = -1;
+	new.floor_color = -1;
+	new.no_text = NULL;
+	new.so_text = NULL;
+	new.ea_text = NULL;
+	new.we_text = NULL;
+	new.spri_text = NULL;
+	new.spwn.pos.x = -1;
+	new.spwn.pos.y = -1;
+	new.spwn.angle = -1;
+	new.map = NULL;
+	new.obj_list = NULL;
+	return (new);
+}
+
+t_player	ft_preset_player(t_config *cfg)
 {
 	t_player new;
 
@@ -65,30 +66,18 @@ t_player		ft_preset_player(t_config *cfg)
 	return (new);
 }
 
-t_text		ft_load_text(t_img *img, char *text_name)
-{
-	t_text new;
-	int	endian;
-	int	bpp;
-	int	line_size;
-
-
-	new.ptr = mlx_xpm_file_to_image(img->mlx_ptr, text_name, &new.width, &new.height);
-	new.data = mlx_get_data_addr(new.ptr, &bpp, &line_size, &endian);
-	printf("load %s : width = %i height = %i\n", text_name, new.width, new.height);
-	return (new);
-}
-
 t_img		ft_preset_img(t_config *cfg)
 {
 	t_img	new;
-	int	bpp;
-	int	linelen;
-	int	endian;
+	int		bpp;
+	int		linelen;
+	int		endian;
 
 	new.mlx_ptr = mlx_init();
-	new.win_ptr = mlx_new_window(new.mlx_ptr, cfg->screen_width, cfg->screen_height, "cub3d");
-	new.img_ptr = mlx_new_image(new.mlx_ptr, cfg->screen_width, cfg->screen_height);
+	new.win_ptr = mlx_new_window(new.mlx_ptr, cfg->screen_width
+			, cfg->screen_height, "cub3d");
+	new.img_ptr = mlx_new_image(new.mlx_ptr, cfg->screen_width
+			, cfg->screen_height);
 	new.img_data = mlx_get_data_addr(new.img_ptr, &bpp, &linelen, &endian);
 	new.no_text = ft_load_text(&new, cfg->no_text);
 	new.so_text = ft_load_text(&new, cfg->so_text);
@@ -98,12 +87,13 @@ t_img		ft_preset_img(t_config *cfg)
 	return (new);
 }
 
-t_prm_pkg	ft_pkg_param(t_config *cfg, t_img *img, t_player *one)
+t_prm_pkg	ft_pkg_prm(t_config *cfg, t_img *img, t_player *pl, t_pos_lst **obj)
 {
 	t_prm_pkg new;
 
 	new.cfg = cfg;
 	new.img = img;
-	new.one = one;
+	new.one = pl;
+	new.obj_lst = *obj;
 	return (new);
-} 
+}

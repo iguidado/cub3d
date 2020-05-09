@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse_cub.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/09 18:29:21 by iguidado          #+#    #+#             */
+/*   Updated: 2020/05/09 18:29:26 by iguidado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include <stdlib.h>
 
@@ -31,7 +43,7 @@ int			ft_get_next_param(t_file_data *fdata)
 
 	if (fdata->line)
 		free(fdata->line);
-	if	((ret = get_next_line(fdata->fd, &fdata->line)) == -1)
+	if ((ret = get_next_line(fdata->fd, &fdata->line)) == -1)
 		return (ERROR_SYSCALL);
 	else if (!ret)
 		return (ERROR_FILE_END);
@@ -52,12 +64,10 @@ int			ft_data_to_cfg(t_config *cfg, t_file_data *fdata)
 {
 	int			i;
 	static char id_array[ID_NB][3] =
-	{ "R", "C", "F", "NO", "SO","WE", "EA", "S" };
+	{ "R", "C", "F", "NO", "SO", "WE", "EA", "S" };
 	static int	(*array_ft[ID_NB])(t_config *, t_file_data *) =
-	{
-		ft_get_res, ft_get_ceilar, ft_get_floor, ft_get_no_text,
-		ft_get_so_text, ft_get_we_text, ft_get_ea_text, ft_get_spri_text
-	};
+	{ ft_get_res, ft_get_ceilar, ft_get_floor, ft_get_no_text,
+		ft_get_so_text, ft_get_we_text, ft_get_ea_text, ft_get_spri_text };
 
 	if (fdata->paramlist)
 		ft_free_tab(&fdata->paramlist);

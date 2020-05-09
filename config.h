@@ -16,7 +16,7 @@ typedef struct	s_config
 	int				spri_text;
 }				t_config;
 
-t_config	ft_parse_cub(char *cub_file);
+t_config		ft_parse_cub(char *cub_file);
 int			ft_get_res(int *width, int *height, char *line);
 
 #endif

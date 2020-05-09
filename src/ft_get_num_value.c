@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_get_num_value.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/09 07:30:55 by iguidado          #+#    #+#             */
+/*   Updated: 2020/05/09 07:30:57 by iguidado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int				ft_get_res(t_config *cfg, t_file_data *fdata)
+int			ft_get_res(t_config *cfg, t_file_data *fdata)
 {
 	if (cfg->mask & FLAG_RES)
 		ft_manage_parse_error(ERROR_DUPLICATE, cfg, fdata);
 	if (ft_count_param(fdata->paramlist) != 3)
-		ft_manage_parse_error(ERROR_SYNTAX, cfg, fdata); 
-	if (!ft_str_isdigit(fdata->paramlist[1]) || !ft_str_isdigit(fdata->paramlist[2]))
+		ft_manage_parse_error(ERROR_SYNTAX, cfg, fdata);
+	if (!ft_str_isdigit(fdata->paramlist[1])
+			|| !ft_str_isdigit(fdata->paramlist[2]))
 		ft_manage_parse_error(ERROR_LEXICAL, cfg, fdata);
 	cfg->screen_width = ft_atoi(fdata->paramlist[1]);
 	cfg->screen_height = ft_atoi(fdata->paramlist[2]);
@@ -21,7 +34,7 @@ int			ft_get_ceilar(t_config *cfg, t_file_data *fdata)
 	if (cfg->mask & FLAG_CEIL)
 		ft_manage_parse_error(ERROR_DUPLICATE, cfg, fdata);
 	if (ft_count_param(fdata->paramlist) != 2)
-		ft_manage_parse_error(ERROR_SYNTAX, cfg, fdata); 
+		ft_manage_parse_error(ERROR_SYNTAX, cfg, fdata);
 	if (!ft_str_is_colorcode(fdata->paramlist[1]))
 		ft_manage_parse_error(ERROR_LEXICAL, cfg, fdata);
 	i = 0;
@@ -49,7 +62,7 @@ int			ft_get_floor(t_config *cfg, t_file_data *fdata)
 	if (cfg->mask & FLAG_FLOOR)
 		ft_manage_parse_error(ERROR_DUPLICATE, cfg, fdata);
 	if (ft_count_param(fdata->paramlist) != 2)
-		ft_manage_parse_error(ERROR_SYNTAX, cfg, fdata); 
+		ft_manage_parse_error(ERROR_SYNTAX, cfg, fdata);
 	if (!ft_str_is_colorcode(fdata->paramlist[1]))
 		ft_manage_parse_error(ERROR_LEXICAL, cfg, fdata);
 	i = 0;
