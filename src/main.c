@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/09 18:49:49 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/05/12 03:32:16 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,11 +157,96 @@ void		ft_raycasting(t_prm_pkg *cub)
 	}
 }
 
+int		ft_obj_is_inscreen(t_config *cfg, t_player *one, t_fdot pos, t_obj *obj)
+{
+	float	vec_x;
+	float	vec_y;
+	float	dir_x;
+	float	dir_y;
+	float	dist;
+
+	vec_x = pos.x - one->x;
+	vec_y = pos.y - one->y;
+	dist = sqrtf(vec_x * vec_x + vec_y * vec_y);
+	dir_x = sin(one->angle);
+	dir_y = cos(one->angle);
+	obj->angle = atan2f(dir_y, dir_x) - atan2f(vec_y, vec_x);
+	if (obj->angle < -M_PI)
+		obj->angle += 2.0f * M_PI;
+	if (obj->angle > M_PI)
+		obj->angle -= 2.0f * M_PI;
+	if (dist > 0.5f && (fabs(obj->angle) < one->fov / 2.0f))
+	{
+		obj->ceiling = (float)(cfg->screen_height / 2.0f)
+			- (cfg->screen_height / dist);
+		return (1);
+	}
+	return (0);
+}
+
+void	ft_complete_obj(t_config *cfg, t_img *img, t_obj *obj)
+{
+	obj->floor = cfg->screen_height - obj->ceiling;
+	obj->height = obj->floor - obj->ceiling;
+	obj->a_ratio = (float)img->spri_text.height / (float)img->spri_text.width;
+	obj->width = obj->height / obj->a_ratio;
+	obj->middle = (0.5f * (obj->angle / (FOV / 2.0f)) + 0.5f) * (float)cfg->screen_width;
+}
+
+void	ft_paint_obj(t_prm_pkg *pkg, t_obj *obj)
+{
+	float	ly;
+	float	lx;
+	float	sample_y;
+	float	sample_x;
+	int		screen_x;
+	int		*screen;
+
+	ft_complete_obj(pkg->cfg, pkg->img, obj);
+	lx = -1;
+	while (++lx < obj->width)
+	{
+		ly = -1;
+		while (++ly < obj->height)
+		{
+			sample_x = lx / obj->width;
+			sample_y = ly / obj->height;
+			screen_x = (int)(obj->middle + lx - (obj->width / 2.0f));
+			if (screen_x >= 0 && screen_x < pkg->cfg->screen_width
+				&& ly + obj->ceiling >= 0 && ly +obj->ceiling < pkg->cfg->screen_width)
+			{
+				screen = (int *)pkg->img->img_data;
+				screen[(screen_x + (int)(ly + obj->ceiling) * pkg->cfg->screen_width)]
+					= ((int *)pkg->img->spri_text.data)
+					[(int)(sample_x * pkg->img->spri_text.width)
+					+ ((int)(sample_y * pkg->img->spri_text.height)
+							* pkg->img->spri_text.height)];
+			}
+		}
+	}
+}
+
+void	ft_manage_obj(t_prm_pkg *pkg)
+{
+	t_pos_lst	*obj_lst;
+	t_obj		tmp_obj;
+
+	obj_lst = pkg->obj_lst;
+	while (obj_lst)
+	{
+		if (ft_obj_is_inscreen(pkg->cfg, pkg->one, obj_lst->pos, &tmp_obj))
+			ft_paint_obj(pkg, &tmp_obj);
+		obj_lst = obj_lst->next;
+	}
+}
+
 int		ft_render_screen(void *param)
 {
 	t_prm_pkg *pkg;
+
 	pkg = (t_prm_pkg *)param;
 	ft_raycasting(pkg);
+	ft_manage_obj(pkg);
 	mlx_put_image_to_window(pkg->img->mlx_ptr, pkg->img->win_ptr, pkg->img->img_ptr, 0, 0);
 	return (0);
 }
@@ -211,7 +296,7 @@ int		ft_get_key(int keycode, void *param)
 		ft_putchar('\n');
 		cub->one->angle += 0.1f;
 	}
-	if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_RIGHT)
 	{
 		ft_putnbr(keycode);
 		ft_putchar('\n');

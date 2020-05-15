@@ -56,8 +56,8 @@ typedef struct s_text
 {
 	void	*ptr;
 	char	*data;
-	int	width;
-	int	height;
+	int		width;
+	int		height;
 }		t_text;
 
 typedef struct	s_img
@@ -104,7 +104,18 @@ typedef struct	s_block
 	float	test_angle;
 	float	sample_x;
 	t_text	*wall_text;
-}		t_block;
+}				t_block;
+
+typedef struct	s_obj
+{
+	float	angle;
+	float	ceiling;
+	float	floor;
+	float	a_ratio;
+	float	width;
+	float	height;
+	float	middle;
+}				t_obj;
 
 typedef struct	s_prm_pkg
 {
