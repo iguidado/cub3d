@@ -47,8 +47,8 @@ typedef struct	s_obj_spwn
 typedef	struct	s_file_data
 {
 	char	*name;
-	int	fd;
-	int	line_nb;
+	int		fd;
+	int		line_nb;
 	char	*line;
 	char	**paramlist;
 }				t_file_data;
@@ -133,17 +133,17 @@ int			ft_str_is_colorcode(char *str);
 **	for corner or keep my oob_checker (wich is pretty heavy)
 */
 
-char			ft_istile(char c);
+char		ft_istile(char c);
 int			ft_is_border_map(char **map, int x, int y);
 int			ft_cross_check_bound(t_config *cfg, t_file_data *fdata, int x, int y);
-void			ft_check_tile_type(t_config *cfg, t_file_data *fdata, int x, int y);
+void		ft_check_tile_type(t_config *cfg, t_file_data *fdata, int x, int y);
 
 /*
 **	Get map and map data
 */
 
 void		ft_add_map(t_config *cfg, t_file_data *fdata);
-int		ft_add_row(char ***ptr_map, char *row);
+int			ft_add_row(char ***ptr_map, char *row);
 void		ft_process_map(t_config *cfg, t_file_data *fdata);
 void		ft_get_spawn(t_config *cfg, t_file_data *fdata, int x, int y);
 void		ft_add_obj(t_config *cfg, t_file_data *fdata, int x, int y);

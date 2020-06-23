@@ -13,14 +13,15 @@ N_SRC = main.c\
 		ft_preset_struct.c\
 		ft_parse_cub.c\
 		ft_parse_utils.c\
-		ft_get_file.c\
 		ft_get_num_value.c\
 		ft_get_texture.c\
 		ft_add_map.c\
 		ft_map_analysis.c\
 		ft_load_game.c\
+		ft_render_screen.c\
 		ft_manage_block.c\
 		ft_manage_error.c\
+		ft_manage_obj.c\
 		ft_unit_test.c\
 		ft_wipe.c
 

@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/09 18:50:31 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/05/27 04:13:31 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ t_img		ft_preset_img(t_config *cfg)
 			, cfg->screen_height, "cub3d");
 	new.img_ptr = mlx_new_image(new.mlx_ptr, cfg->screen_width
 			, cfg->screen_height);
+	new.img_width = cfg->screen_width;
+	new.img_height = cfg->screen_height;
 	new.img_data = mlx_get_data_addr(new.img_ptr, &bpp, &linelen, &endian);
 	new.no_text = ft_load_text(&new, cfg->no_text);
 	new.so_text = ft_load_text(&new, cfg->so_text);
