@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2020/06/23 00:05:32 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/06/29 14:29:16 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,9 +213,9 @@ void		ft_launch_game(t_config cfg)
 		ft_export_bmp(&img);
 		ft_escape_game(&pkg);
 	}
+	mlx_hook(img.win_ptr, 2, 1, ft_get_key, &pkg);
 	mlx_hook(img.win_ptr, 17, 0, exit_cl, NULL);
 //	mlx_hook(img.win_ptr, 17, 0, &ft_escape_game, &pkg);
-//	mlx_hook(img.win_ptr, 2, 1, ft_get_key, &pkg);
 	mlx_loop_hook(img.mlx_ptr, ft_render_screen, &pkg);
 	mlx_loop(img.mlx_ptr);
 	mlx_destroy_image(img.mlx_ptr, img.img_ptr);
