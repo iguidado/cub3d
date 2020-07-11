@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:48:19 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/09 18:48:21 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:09:06 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void		ft_get_spawn(t_config *cfg, t_file_data *fdata, int x, int y)
 	{
 		cfg->spwn.pos.y = y;
 		cfg->spwn.pos.x = x;
-		if (cfg->map[y][x] == 'N')
+		if (cfg->map.data[y][x] == 'N')
 			cfg->spwn.angle = M_PI;
-		if (cfg->map[y][x] == 'E')
+		if (cfg->map.data[y][x] == 'E')
 			cfg->spwn.angle = M_PI / 2.0f;
-		if (cfg->map[y][x] == 'S')
+		if (cfg->map.data[y][x] == 'S')
 			cfg->spwn.angle = 0.0f;
-		if (cfg->map[y][x] == 'W')
+		if (cfg->map.data[y][x] == 'W')
 			cfg->spwn.angle = M_PI * (3.0f / 2.0f);
 	}
 }
@@ -71,13 +71,13 @@ void		ft_add_obj(t_config *cfg, t_file_data *fdata, int x, int y)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	new->pos.x = x;
 	new->pos.y = y;
-	cfg->map[y][x] = '0';
+	cfg->map.data[y][x] = '0';
 	new->next = cfg->obj_list;
 	cfg->obj_list = new;
 }
 
 /*
-**	can replace is set, to see if it is more performant
+**	can replace  ft_isset, to see if it is more performant
 **
 **	char		ft_istile(char c)
 **	{
@@ -89,6 +89,34 @@ void		ft_add_obj(t_config *cfg, t_file_data *fdata, int x, int y)
 **	}
 */
 
+void		ft_equalize_row(t_map *map)
+{
+	int		y;
+	int		x;
+	char	*new;
+
+	y = 0;
+	while (y < map->res.y)
+	{
+		x = 0;
+		new = malloc(sizeof(char) * map->res.x + 1);
+		new[x] = map->res.x;
+		while (map->data[y][x])
+		{
+			new[x] = map->data[y][x];
+			x++;
+		}
+		while (x < map->res.x)
+		{
+			new[x] = ' ';
+			x++;
+		}
+		free(map->data[y]);
+		map->data[y] = new;
+		y++;
+	}
+}
+
 void		ft_process_map(t_config *cfg, t_file_data *fdata)
 {
 	int		x;
@@ -96,10 +124,10 @@ void		ft_process_map(t_config *cfg, t_file_data *fdata)
 	char	tile;
 
 	y = 0;
-	while (cfg->map[y])
-	{
+	while (cfg->map.data[y])
+	{ 
 		x = 0;
-		while ((tile = cfg->map[y][x]))
+		while ((tile = cfg->map.data[y][x]))
 		{
 			if (!ft_isset(TILES, tile))
 				ft_manage_parse_error(ERROR_MAP_BAD_TILE, cfg, fdata);
@@ -110,11 +138,15 @@ void		ft_process_map(t_config *cfg, t_file_data *fdata)
 				ft_add_obj(cfg, fdata, x, y);
 			x++;
 		}
+		if (x > cfg->map.res.x)
+			cfg->map.res.x = x;
 		y++;
 	}
+	cfg->map.res.y = y;
 	if (cfg->spwn.pos.x < 0)
 		ft_manage_parse_error(ERROR_MAP_PLAYER_SPAWN, cfg, fdata);
-	cfg->map[cfg->spwn.pos.y][cfg->spwn.pos.x] = '0';
+	cfg->map.data[cfg->spwn.pos.y][cfg->spwn.pos.x] = '0';
+	ft_equalize_row(&cfg->map);
 }
 
 int			ft_add_row(char ***ptr_map, char *row)
@@ -158,9 +190,9 @@ void		ft_add_map(t_config *cfg, t_file_data *fdata)
 			ft_manage_parse_error(ERROR_FILE_END, cfg, fdata);
 		fdata->line_nb++;
 	}
-	ft_add_row(&cfg->map, fdata->line);
+	ft_add_row(&cfg->map.data, fdata->line);
 	while (get_next_line(fdata->fd, &fdata->line))
-		ft_add_row(&cfg->map, fdata->line);
-	ft_add_row(&cfg->map, fdata->line);
+		ft_add_row(&cfg->map.data, fdata->line);
+	ft_add_row(&cfg->map.data, fdata->line);
 	ft_process_map(cfg, fdata);
 }

@@ -10,6 +10,7 @@ N_MAIN_TEST = unit_test.c
 
 
 N_SRC = main.c\
+		ft_export_bmp.c\
 		ft_preset_struct.c\
 		ft_parse_cub.c\
 		ft_parse_utils.c\

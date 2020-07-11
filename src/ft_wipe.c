@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:21 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/27 06:06:36 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/05 16:58:13 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	ft_wipe_cfg(t_config *cfg)
 		free(cfg->we_text);
 	if (cfg->spri_text)
 		free(cfg->spri_text);
-	if (cfg->map)
-		ft_free_tab(&cfg->map);
+	if (cfg->map.data)
+		ft_free_tab(&cfg->map.data);
 	if (cfg->obj_list)
 		ft_wipe_obj_spwn(&cfg->obj_list);
 	cfg->no_text = NULL;
@@ -57,18 +57,18 @@ void	ft_wipe_cfg(t_config *cfg)
 	cfg->so_text = NULL;
 	cfg->we_text = NULL;
 	cfg->spri_text = NULL;
-	cfg->map = NULL;
+	cfg->map.data = NULL;
 	cfg->obj_list = NULL;
 }
 
 void	ft_wipe_img(t_img *img)
 {
+	mlx_destroy_window(img->mlx_ptr, img->win_ptr);
 	mlx_destroy_image(img->mlx_ptr, img->no_text.ptr);
 	mlx_destroy_image(img->mlx_ptr, img->so_text.ptr);
 	mlx_destroy_image(img->mlx_ptr, img->ea_text.ptr);
 	mlx_destroy_image(img->mlx_ptr, img->we_text.ptr);
 	mlx_destroy_image(img->mlx_ptr, img->spri_text.ptr);
-	mlx_destroy_window(img->mlx_ptr, img->win_ptr);
 	mlx_destroy_image(img->mlx_ptr, img->img_ptr);
 	free(img->mlx_ptr);
 }

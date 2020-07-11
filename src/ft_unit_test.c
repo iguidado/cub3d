@@ -23,8 +23,8 @@ void	ft_print_cfg(t_config *cfg)
 			cfg->ceilar_color, cfg->floor_color,
 			cfg->no_text, cfg->so_text, cfg->ea_text,
 			cfg->we_text, cfg->spri_text);
-	if (cfg->map)
-		ft_print_tab(cfg->map);
+	if (cfg->map.data)
+		ft_print_tab(cfg->map.data);
 }
 
 void	ft_print_fdata(t_file_data *fdata)

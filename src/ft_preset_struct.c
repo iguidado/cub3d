@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/27 04:13:31 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/11 06:48:16 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ t_config	ft_preset_config(void)
 	new.spwn.pos.x = -1;
 	new.spwn.pos.y = -1;
 	new.spwn.angle = -1;
-	new.map = NULL;
+	new.map.data = NULL;
+	new.map.res.x = 0;
+	new.map.res.y = 0;
 	new.obj_list = NULL;
 	return (new);
 }
@@ -63,17 +65,33 @@ t_player	ft_preset_player(t_config *cfg)
 	new.y = ((float)cfg->spwn.pos.y) + 0.5f;
 	new.angle = cfg->spwn.angle;
 	new.fov = FOV;
+	new.speed = PLAYER_SPEED;
+	new.key_id[INPUT_W] = KEY_W;
+	new.key_id[INPUT_A] = KEY_A;
+	new.key_id[INPUT_S] = KEY_S;
+	new.key_id[INPUT_D] = KEY_D;
+	new.key_id[INPUT_LEFT] = KEY_LEFT;
+	new.key_id[INPUT_RIGHT] = KEY_RIGHT;
+	new.key_id[INPUT_ESC] = KEY_ESC;
+	ft_memset(new.input, sizeof(new.input), 0);
 	return (new);
 }
 
 t_img		ft_preset_img(t_config *cfg)
 {
 	t_img	new;
+	t_dot	res_max;
 	int		bpp;
 	int		linelen;
 	int		endian;
 
 	new.mlx_ptr = mlx_init();
+	mlx_get_screen_size(new.mlx_ptr, &res_max.y, &res_max.x);
+	if (res_max.y < cfg->screen_width)
+		cfg->screen_width = res_max.y;
+	if (res_max.x < cfg->screen_height)
+		cfg->screen_height = res_max.x;
+	printf("res.height = %i, width = %i \n", cfg->screen_height, cfg->screen_width);
 	new.win_ptr = mlx_new_window(new.mlx_ptr, cfg->screen_width
 			, cfg->screen_height, "cub3d");
 	new.img_ptr = mlx_new_image(new.mlx_ptr, cfg->screen_width

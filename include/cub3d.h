@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 11:38:30 by iguidado          #+#    #+#             */
-/*   Updated: 2020/06/05 20:36:50 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:19:53 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,28 @@
 # define KEY_LEFT 65363
 # define KEY_RIGHT 65361
 # define KEY_ESC 65307
-# define FOV (M_PI / 4.0f)
 
+# define FOV (M_PI / 4.0f)
+# define PLAYER_SPEED 0.1f
+
+# define KEY_PRESS 1
+# define KEY_RELEASE 2
+# define EVENT_EXIT 17
 /*
 **	Structure for games
 */
+
+typedef enum e_input
+{
+	INPUT_W,
+	INPUT_A,
+	INPUT_S,
+	INPUT_D,
+	INPUT_LEFT,
+	INPUT_RIGHT,
+	INPUT_ESC,
+	NB_INPUT
+}			t_input;
 
 typedef struct	s_fdot
 {
@@ -117,6 +134,9 @@ typedef	struct	s_player
 	float	y;
 	float	angle;
 	float	fov;
+	float	speed;
+	int		key_id[NB_INPUT];
+	bool	input[NB_INPUT];
 }				t_player;
 
 typedef	struct	s_ray_x
@@ -185,7 +205,6 @@ t_prm_pkg	ft_pkg_prm(t_config *cfg, t_img *img, t_player *one, t_pos_lst **obj);
 /*
 **	Load game
 */
-
 t_img		ft_preset_img(t_config *cfg);
 t_text		ft_load_text(t_img *img, char *text_name);
 t_player	ft_preset_player(t_config *cfg);
@@ -196,7 +215,6 @@ t_pos_lst	*ft_load_obj(t_obj_spwn *obj_list);
 **	Render the game aka img.data
 **	manipulation and raycasting
 */
-
 int			ft_render_screen(void *param);
 void		ft_raycasting(t_prm_pkg *cub);
 int			ft_raycast(t_prm_pkg *cub, t_ray_x *ray);
@@ -206,16 +224,16 @@ void		ft_fill_height(t_prm_pkg *cub, t_ray_x *ray, t_block *block);
 /*
 **	ft_get_key : Manage hooked key
 */
-
 int			ft_get_key(int keycode, void *param);
 
 /*
 ** Utils
 */
 
-int			ft_is_oob(char **map, float x, float y);
+int			ft_is_oob(t_map *map, float x, float y);
 int			ft_strequ(char *str1, char *str2);
 char		*wrap_mlx_get_addr_data(void *img_ptr);
+void		ft_escape_game(t_prm_pkg *cub);
 
 /*
 **	clean data struct
@@ -263,5 +281,14 @@ void		ft_manage_obj(t_prm_pkg *pkg);
 void		ft_print_fdata(t_file_data *fdata);
 void		ft_print_cfg(t_config *cfg);
 void		ft_print_obj(t_obj_spwn *obj_list);
+
+/*
+** ft_export_bmp
+*/
+
+void		ft_export_bmp(t_img *img);
+void		ft_write_pixmap(t_img *img, int fd);
+void		ft_init_bmp_hdr(t_img *img, t_bmp_header *hdr);
+void		ft_write_bmp_hdr(int fd, t_bmp_header *hdr);
 
 #endif

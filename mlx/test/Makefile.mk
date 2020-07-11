@@ -15,7 +15,7 @@ OBJ = $(SRC:.c=.o)
 all	:$(NAME)
 
 $(NAME)	:$(OBJ)
-	$(CC) -g3 -fsanitize=address -o $(NAME) $(OBJ) -L.. -lmlx -L$(INCLIB) -lXext -lX11 -lm -lbsd
+	$(CC) -o $(NAME) $(OBJ) -L.. -lmlx -L$(INCLIB) -lXext -lX11 -lm -lbsd
 
 clean	:
 	rm -f $(NAME) $(OBJ) *~ core *.core

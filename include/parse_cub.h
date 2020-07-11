@@ -1,6 +1,7 @@
 #ifndef PARSE_CUB_H
 # define PARSE_CUB_H
 
+# include <stdbool.h>
 # define TILES " 102NESW"
 # define WALLS "1"
 # define INTERIOR "02NESW"
@@ -25,7 +26,6 @@ typedef	struct	s_dot
 	int x;
 	int y;
 }				t_dot;
-
 
 typedef struct	s_spawn
 {
@@ -58,6 +58,12 @@ typedef	struct	s_file_data
 ** 
 */
 
+typedef struct	s_map
+{
+	char	**data;
+	t_dot	res;
+}				t_map;
+
 typedef struct	s_config
 {
 	unsigned char	mask;
@@ -71,7 +77,7 @@ typedef struct	s_config
 	char			*we_text;
 	char			*spri_text;
 	t_spawn			spwn;
-	char			**map;
+	t_map			map;
 	t_obj_spwn		*obj_list;
 }				t_config;
 
@@ -135,7 +141,7 @@ int			ft_str_is_colorcode(char *str);
 
 char		ft_istile(char c);
 int			ft_is_border_map(char **map, int x, int y);
-int			ft_cross_check_bound(t_config *cfg, t_file_data *fdata, int x, int y);
+int			ft_cross_check_bound(t_config *cfg, int x, int y);
 void		ft_check_tile_type(t_config *cfg, t_file_data *fdata, int x, int y);
 
 /*
