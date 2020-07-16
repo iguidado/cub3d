@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/11 06:43:17 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/16 10:11:30 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ int		main(int ac, char **av)
 	if (ac > 2)
 		if (ft_strequ(av[2], "--save"))
 				setup_cfg.mask = 0;
+	ft_print_tab(setup_cfg.map.data);
 	ft_launch_game(setup_cfg);
 	ft_print_fdata(&fdata);
 	ft_print_cfg(&setup_cfg);

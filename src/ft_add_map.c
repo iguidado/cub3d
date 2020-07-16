@@ -6,11 +6,31 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:48:19 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/07 16:09:06 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/16 10:55:53 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+**	char		*ft_reverse_row(char *row)
+**	{
+**		int		i;
+**		int		strlen;
+**		char	*rev_str;
+**	
+**		i = 0;
+**		strlen = ft_strlen(row);
+**		rev_str = malloc(sizeof(char) * (strlen + 1));
+**		rev_str[strlen] = 0;
+**		while (row[i])
+**		{
+**			rev_str[strlen - i - 1] = row[i];
+**			i++;
+**		}
+**		return (rev_str);
+**	}
+*/
 
 /*
 **	int			ft_set_map(t_file_data *fdata, t_map *map)
@@ -99,18 +119,18 @@ void		ft_equalize_row(t_map *map)
 	while (y < map->res.y)
 	{
 		x = 0;
-		new = malloc(sizeof(char) * map->res.x + 1);
-		new[x] = map->res.x;
+		new = malloc(sizeof(char) * (map->res.x + 1));
+		new[map->res.x] = 0;
 		while (map->data[y][x])
 		{
-			new[x] = map->data[y][x];
+			new[map->res.x - 1 - x] = map->data[y][x];
 			x++;
 		}
-		while (x < map->res.x)
-		{
-			new[x] = ' ';
-			x++;
-		}
+			while (map->res.x -x - 1 >= 0)
+			{
+				new[map->res.x - x - 1] = ' ';
+				x++;
+			}
 		free(map->data[y]);
 		map->data[y] = new;
 		y++;
@@ -192,7 +212,7 @@ void		ft_add_map(t_config *cfg, t_file_data *fdata)
 	}
 	ft_add_row(&cfg->map.data, fdata->line);
 	while (get_next_line(fdata->fd, &fdata->line))
-		ft_add_row(&cfg->map.data, fdata->line);
+		ft_add_row(&cfg->map.data,fdata->line);
 	ft_add_row(&cfg->map.data, fdata->line);
 	ft_process_map(cfg, fdata);
 }

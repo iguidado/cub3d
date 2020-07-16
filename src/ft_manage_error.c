@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:23:00 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/09 18:23:04 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/11 07:32:45 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,7 @@ void	ft_manage_parse_error(int errnum, t_config *cfg, t_file_data *fdata)
 	else if (errnum >= ERROR_MAP_PLAYER_SPAWN)
 		error_ft[3](errnum, cfg, fdata);
 	else
-		error_ft[errnum - 1 / 2](errnum, cfg, fdata);
-	ft_putchar_fd('\n', 2);
+		error_ft[(errnum - 1) / 2](errnum, cfg, fdata);
 	ft_wipe_file_data(fdata);
 	ft_wipe_cfg(cfg);
 	exit(EXIT_FAILURE);

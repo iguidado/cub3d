@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:29:21 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/09 18:29:26 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/11 07:29:27 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_config	ft_get_config(t_file_data *fdata)
 	while (cfg_new.mask < 255)
 	{
 		if ((error_id = ft_get_next_param(fdata)) >= 0)
-			ft_manage_parse_error(error_id, &cfg_new, fdata);
+			ft_manage_parse_error(ERROR_ID, &cfg_new, fdata);
 		cfg_new.mask |= ft_data_to_cfg(&cfg_new, fdata);
 	}
 	return (cfg_new);
