@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:48:19 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/16 10:55:53 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/17 12:08:30 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void		ft_equalize_row(t_map *map)
 	char	*new;
 
 	y = 0;
-	while (y < map->res.y)
+	while (map->data[y])
 	{
 		x = 0;
 		new = malloc(sizeof(char) * (map->res.x + 1));
@@ -143,6 +143,7 @@ void		ft_process_map(t_config *cfg, t_file_data *fdata)
 	int		y;
 	char	tile;
 
+	ft_equalize_row(&cfg->map);
 	y = 0;
 	while (cfg->map.data[y])
 	{ 
@@ -158,20 +159,18 @@ void		ft_process_map(t_config *cfg, t_file_data *fdata)
 				ft_add_obj(cfg, fdata, x, y);
 			x++;
 		}
-		if (x > cfg->map.res.x)
-			cfg->map.res.x = x;
 		y++;
 	}
 	cfg->map.res.y = y;
 	if (cfg->spwn.pos.x < 0)
 		ft_manage_parse_error(ERROR_MAP_PLAYER_SPAWN, cfg, fdata);
 	cfg->map.data[cfg->spwn.pos.y][cfg->spwn.pos.x] = '0';
-	ft_equalize_row(&cfg->map);
 }
 
 int			ft_add_row(char ***ptr_map, char *row)
 {
 	int		i;
+	int		ret;
 	char	**new;
 
 	if (!row)
@@ -211,8 +210,13 @@ void		ft_add_map(t_config *cfg, t_file_data *fdata)
 		fdata->line_nb++;
 	}
 	ft_add_row(&cfg->map.data, fdata->line);
+	cfg->map.res.x = ft_strlen(fdata->line);
 	while (get_next_line(fdata->fd, &fdata->line))
+	{
 		ft_add_row(&cfg->map.data,fdata->line);
+		if (ft_strlen(fdata->line) > cfg->map.res.x)
+			cfg->map.res.x = ft_strlen(fdata->line);
+	}
 	ft_add_row(&cfg->map.data, fdata->line);
 	ft_process_map(cfg, fdata);
 }

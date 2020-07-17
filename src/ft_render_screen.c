@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 06:13:29 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/14 14:32:38 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/07/16 11:39:12 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ int		ft_raycast(t_prm_pkg *cub, t_ray_x *ray)
 		if (ft_is_oob(&cub->cfg->map, ray->test_x, ray->test_y))
 			return (0);
 		if (cub->cfg->map.data[ray->test_y][ray->test_x] == '1')
+		{
 			return (1);
+		}
 	}
 }
 
@@ -121,6 +123,7 @@ void		ft_raycasting(t_prm_pkg *cub)
 {
 	t_ray_x		ray;
 	t_block		block;
+	float fisheye_fixer;
 
 	ray.x = 0;
 	while (ray.x < cub->cfg->screen_width)
@@ -130,8 +133,11 @@ void		ft_raycasting(t_prm_pkg *cub)
 			ft_fill_height_void(cub->cfg, cub->img, &ray);
 		else
 		{
+			fisheye_fixer = ((float)ray.x / (float)cub->img->img_width
+					* cub->one->fov) - cub->one->fov / 2;
 			block = ft_get_block(cub->cfg, &ray, cub->one);
 			ft_add_wall_to_block(cub->img, &block);
+			ray.len *= cos(fisheye_fixer);
 			ft_fill_height(cub, &ray, &block);
 		}
 		cub->z_buffer[ray.x] = ray.len;
