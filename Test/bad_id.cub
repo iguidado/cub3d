@@ -1,0 +1,25 @@
+NO ./img/simple_answers.xpm
+
+R 640 320
+
+SB ./img/nano.xpm
+
+WE ./img/vim.xpm
+
+
+EA ./img/emacs.xpm
+
+S ./mlx/test/open.xpm
+
+C 33,33,222
+
+F 122,40,12
+
+
+111111
+100001
+100001
+100W01
+100001
+100001
+111111

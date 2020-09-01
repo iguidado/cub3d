@@ -1,0 +1,6 @@
+trier les objets par ordre decroissant de distance avec le joueur
+
+pythagore : sqrt(pow2(vec1.x - vec2.x) + pow2(vec1.y - vec2.y));
+
+
+Proteger les mallocs et les integrer au system d'erreur sous forme de syscall;
