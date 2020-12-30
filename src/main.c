@@ -6,22 +6,11 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/16 10:11:30 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/12/30 10:02:36 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-char	*wrap_mlx_get_addr_data(void *img_ptr)
-{
-	int		bpp;
-	int		line_size;
-	int		endian;
-	char	*img_data;
-
-	img_data = mlx_get_data_addr(img_ptr, &bpp, &line_size, &endian);
-	return (img_data);
-}
 
 int		ft_is_oob(t_map *map, float x, float y)
 {

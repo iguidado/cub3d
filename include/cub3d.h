@@ -232,7 +232,6 @@ int			ft_get_key(int keycode, void *param);
 
 int			ft_is_oob(t_map *map, float x, float y);
 int			ft_strequ(char *str1, char *str2);
-char		*wrap_mlx_get_addr_data(void *img_ptr);
 void		ft_escape_game(t_prm_pkg *cub);
 
 /*
