@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2020/12/30 10:02:36 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/12/31 08:17:26 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,6 @@ void		ft_move_player(t_player *one)
 	}
 }
 
-void	ft_cpy_player(t_player *two, t_player *one)
-{
-	two->angle = one->angle;
-	two->x = one->x;
-	two->y = one->y;
-	two->fov = one->fov;
-	ft_memcpy(two->key_id, one->key_id, sizeof(one->key_id));
-	ft_memcpy(two->input, one->input, sizeof(one->input));
-}
-
 void	ft_escape_game(t_prm_pkg *cub)
 {
 	ft_putendl("escaping game");
@@ -113,7 +103,6 @@ int		ft_main_loop(void *param)
 	t_player	one_ghost;
 
 	cub = (t_prm_pkg *)param;
-//	ft_cpy_player(&one_ghost, cub->one);
 	ft_memcpy(&one_ghost, cub->one, sizeof(*cub->one));
 //	printf("---->%lu<----", sizeof(*cub->one));
 //	ft_memcpy(one_ghost.key_id, cub->one->key_id, sizeof(cub->one->key_id));
@@ -135,6 +124,11 @@ int		ft_main_loop(void *param)
 	if (!ft_is_oob(&cub->cfg->map, one_ghost.x, one_ghost.y))
 	{
 		ft_memcpy(cub->one, &one_ghost, sizeof(*cub->one));
+	}
+	else
+	{
+		printf("x = %2.2f, y= %2.2f\n", one_ghost.x, one_ghost.y);
+
 	}
 	ft_render_screen(param);
 	return (0);
