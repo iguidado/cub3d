@@ -141,7 +141,7 @@ int			ft_str_is_colorcode(char *str);
 
 char		ft_istile(char c);
 int			ft_is_border_map(char **map, int x, int y);
-int			ft_cross_check_bound(t_config *cfg, int x, int y);
+int			ft_check_surrounding_rows(t_config *cfg, int x, int y);
 void		ft_check_tile_type(t_config *cfg, t_file_data *fdata, int x, int y);
 
 /*

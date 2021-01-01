@@ -6,13 +6,13 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2020/12/31 08:17:26 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/12/31 15:39:37 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		ft_is_oob(t_map *map, float x, float y)
+int			ft_is_oob(t_map *map, float x, float y)
 {
 	if (x < 0.0f || y < 0.0f)
 		return (1);
@@ -23,8 +23,8 @@ int		ft_is_oob(t_map *map, float x, float y)
 
 int			ft_get_input(int keycode, void *param)
 {
-	int i;
-	t_prm_pkg *pkg;
+	int			i;
+	t_prm_pkg	*pkg;
 
 	pkg = (t_prm_pkg *)param;
 	i = 0;
@@ -39,8 +39,8 @@ int			ft_get_input(int keycode, void *param)
 
 int			ft_release_input(int keycode, void *param)
 {
-	int i;
-	t_prm_pkg *pkg;
+	int			i;
+	t_prm_pkg	*pkg;
 
 	pkg = (t_prm_pkg *)param;
 	i = 0;
@@ -56,9 +56,9 @@ int			ft_release_input(int keycode, void *param)
 void		ft_move_player(t_player *one)
 {
 	if (one->input[INPUT_LEFT])
-			one->angle += 0.1f;
+		one->angle += 0.1f;
 	if (one->input[INPUT_RIGHT])
-			one->angle -= 0.1f;
+		one->angle -= 0.1f;
 	if (one->input[INPUT_W])
 	{
 		one->x += sin(one->angle) * one->speed;
@@ -81,7 +81,7 @@ void		ft_move_player(t_player *one)
 	}
 }
 
-void	ft_escape_game(t_prm_pkg *cub)
+void		ft_escape_game(t_prm_pkg *cub)
 {
 	ft_putendl("escaping game");
 	free(cub->z_buffer);
@@ -91,44 +91,25 @@ void	ft_escape_game(t_prm_pkg *cub)
 	exit(EXIT_SUCCESS);
 }
 
-int		ft_prep_escape(t_prm_pkg *pkg)
+int			ft_prep_escape(t_prm_pkg *pkg)
 {
 	pkg->one->input[INPUT_ESC] = true;
 	return (0);
 }
 
-int		ft_main_loop(void *param)
+int			ft_main_loop(void *param)
 {
 	t_prm_pkg	*cub;
 	t_player	one_ghost;
 
 	cub = (t_prm_pkg *)param;
 	ft_memcpy(&one_ghost, cub->one, sizeof(*cub->one));
-//	printf("---->%lu<----", sizeof(*cub->one));
-//	ft_memcpy(one_ghost.key_id, cub->one->key_id, sizeof(cub->one->key_id));
-//	ft_memcpy(one_ghost.input, cub->one->input, sizeof(cub->one->input));
-/*
-**	int i;
-**
-**	i = 0;
-**	while (i < NB_INPUT)
-**	{
-**		printf("one - > key : %i,intput %i\n", cub->one->key_id[i], cub->one->input[i]);
-**		printf("ghost - > key : %i,intput %i\n", one_ghost.key_id[i], one_ghost.input[i]);
-**		i++;
-**	}
-*/
 	ft_move_player(&one_ghost);
 	if (cub->one->input[INPUT_ESC])
 		ft_escape_game(cub);
 	if (!ft_is_oob(&cub->cfg->map, one_ghost.x, one_ghost.y))
 	{
 		ft_memcpy(cub->one, &one_ghost, sizeof(*cub->one));
-	}
-	else
-	{
-		printf("x = %2.2f, y= %2.2f\n", one_ghost.x, one_ghost.y);
-
 	}
 	ft_render_screen(param);
 	return (0);
@@ -161,7 +142,7 @@ void		ft_launch_game(t_config cfg)
 	mlx_loop(img.mlx_ptr);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_file_data		fdata;
 	t_config		setup_cfg;
@@ -172,7 +153,7 @@ int		main(int ac, char **av)
 	ft_wipe_file_data(&fdata);
 	if (ac > 2)
 		if (ft_strequ(av[2], "--save"))
-				setup_cfg.mask = 0;
+			setup_cfg.mask = 0;
 	ft_print_tab(setup_cfg.map.data);
 	ft_launch_game(setup_cfg);
 	ft_print_fdata(&fdata);

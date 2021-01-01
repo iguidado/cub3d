@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/11 06:48:16 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/12/31 15:38:53 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ t_img		ft_preset_img(t_config *cfg)
 		cfg->screen_width = res_max.y;
 	if (res_max.x < cfg->screen_height)
 		cfg->screen_height = res_max.x;
-	printf("res.height = %i, width = %i \n", cfg->screen_height, cfg->screen_width);
 	new.win_ptr = mlx_new_window(new.mlx_ptr, cfg->screen_width
 			, cfg->screen_height, "cub3d");
 	new.img_ptr = mlx_new_image(new.mlx_ptr, cfg->screen_width

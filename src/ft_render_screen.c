@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 06:13:29 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/16 11:39:12 by iguidado         ###   ########.fr       */
+/*   Updated: 2021/01/01 15:04:41 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ void	ft_paint_wall(t_prm_pkg *cub, t_ray_x *ray, t_block *block)
 	i += cub->cfg->screen_width * ceil;
 	while (i < (floor * cub->cfg->screen_width))
 	{
-			sample_y = ft_get_sample_y(i, cub->cfg->screen_width, ceil, floor);
-			screen[i] = ft_get_wall_pixel(sample_y, block);
-			i += cub->cfg->screen_width;
+		sample_y = ft_get_sample_y(i, cub->cfg->screen_width, ceil, floor);
+		screen[i] = ft_get_wall_pixel(sample_y, block);
+		i += cub->cfg->screen_width;
 	}
 }
 
 void	ft_fill_height(t_prm_pkg *cub, t_ray_x *ray, t_block *block)
 {
-	int	i;
-	int	*screen;
-	int	ceil;
-	int	floor;
+	int		i;
+	int		*screen;
+	int		ceil;
+	int		floor;
 	float	sample_y;
 
 	screen = (int *)cub->img->img_data;
@@ -86,18 +86,23 @@ void	ft_fill_height_void(t_config *cfg, t_img *img, t_ray_x *ray)
 	}
 }
 
-void		ft_set_ray(t_prm_pkg *cub, t_ray_x *ray)
+void	ft_set_ray(t_prm_pkg *cub, t_ray_x *ray)
 {
 	float	leftmost_ray;
 	float	x_normalized;
 
 	leftmost_ray = (cub->one->angle - cub->one->fov / 2.0f);
 	x_normalized = ((float)ray->x / (float)cub->cfg->screen_width);
-	ray->angle =  leftmost_ray + x_normalized * cub->one->fov;
+	ray->angle = leftmost_ray + x_normalized * cub->one->fov;
 	ray->eye_x = sin(ray->angle);
 	ray->eye_y = cos(ray->angle);
 	ray->len = 0.0f;
 }
+
+/*
+ ** need to implement DDA algorithm for 
+ ** raycasting
+ */
 
 int		ft_raycast(t_prm_pkg *cub, t_ray_x *ray)
 {
@@ -115,15 +120,11 @@ int		ft_raycast(t_prm_pkg *cub, t_ray_x *ray)
 	}
 }
 
-/*
-** need to implement DDA algorithm for 
-** raycasting
-*/
-void		ft_raycasting(t_prm_pkg *cub)
+void	ft_raycasting(t_prm_pkg *cub)
 {
 	t_ray_x		ray;
 	t_block		block;
-	float fisheye_fixer;
+	float		fisheye_fixer;
 
 	ray.x = 0;
 	while (ray.x < cub->cfg->screen_width)

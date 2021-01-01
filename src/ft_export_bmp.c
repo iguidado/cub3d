@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 18:59:28 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/04 14:10:40 by iguidado         ###   ########.fr       */
+/*   Updated: 2020/12/31 10:59:37 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void		ft_write_pixmap(t_img *img, int fd)
 		i = 0;
 		while (i < img->img_width)
 		{
-		//	write(fd, &(img->img_data[(img->img_height * img->img_width * 4) + (i * 4) + 3]), 1);
-		//	write(fd, &(img->img_data[(img->img_height * img->img_width * 4) + (i * 4) + 2]), 1);
-		//	write(fd, &(img->img_data[(img->img_height * img->img_width * 4) + (i * 4) + 1]), 1);
-		//	write(fd, &(img->img_data[(img->img_height * img->img_width * 4) + (i * 4)]), 1);
 			write(fd, &(img->img_data[(img->img_height * img->img_width * 4) + (i * 4)]), 4);
 			i++;
 		}

@@ -6,11 +6,25 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 05:55:13 by iguidado          #+#    #+#             */
-/*   Updated: 2020/06/05 21:13:32 by iguidado         ###   ########.fr       */
+/*   Updated: 2021/01/01 16:10:19 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_manage_obj(t_prm_pkg *pkg)
+{
+	t_pos_lst	*obj_lst;
+	t_obj		tmp_obj;
+
+	obj_lst = pkg->obj_lst;
+	while (obj_lst)
+	{
+		if (ft_is_inscrn(pkg->cfg, pkg->one, obj_lst->pos, &tmp_obj))
+			ft_paint_obj(pkg, &tmp_obj);
+		obj_lst = obj_lst->next;
+	}
+}
 
 int		ft_is_inscrn(t_config *cfg, t_player *one, t_fdot pos, t_obj *obj)
 {
@@ -38,16 +52,6 @@ int		ft_is_inscrn(t_config *cfg, t_player *one, t_fdot pos, t_obj *obj)
 	return (0);
 }
 
-void	ft_complete_obj(t_config *cfg, t_img *img, t_obj *obj)
-{
-	obj->floor = cfg->screen_height - obj->ceiling;
-	obj->height = obj->floor - obj->ceiling;
-	obj->a_ratio = (float)img->spri_text.height / (float)img->spri_text.width;
-	obj->width = obj->height / obj->a_ratio;
-	obj->middle = (0.5f * (obj->angle / (FOV / 2.0f)) + 0.5f)
-		* (float)cfg->screen_width;
-}
-
 void	ft_spri_pix(t_img *img, int *screen, t_spri_coord *spri, int ceil)
 {
 	int y;
@@ -66,6 +70,32 @@ void	ft_spri_pix(t_img *img, int *screen, t_spri_coord *spri, int ceil)
 	}
 }
 
+void	ft_complete_obj(t_config *cfg, t_img *img, t_obj *obj)
+{
+	obj->floor = cfg->screen_height - obj->ceiling;
+	obj->height = obj->floor - obj->ceiling;
+	obj->a_ratio = (float)img->spri_text.height / (float)img->spri_text.width;
+	obj->width = obj->height / obj->a_ratio;
+	obj->middle = (0.5f * (obj->angle / (FOV / 2.0f)) + 0.5f)
+		* (float)cfg->screen_width;
+}
+
+#include <stdio.h>
+
+int	endl(char *str)
+{
+	int i;
+	int ret;
+
+	i = 0;
+	ret = 1;
+	while (str[i])
+		i++;
+	ret &= write(1, str, i);
+	ret &= write(1, "\n", i);
+	return (1);
+}
+
 void	ft_paint_obj(t_prm_pkg *pkg, t_obj *obj)
 {
 	t_spri_coord	spri;
@@ -79,35 +109,17 @@ void	ft_paint_obj(t_prm_pkg *pkg, t_obj *obj)
 		spri.ly = -1;
 		spri.sample_x = spri.lx / obj->width;
 		spri.screen_x = (int)(obj->middle + spri.lx - (obj->width / 2.0f));
-		if (spri.screen_x >= 0
-				&& spri.screen_x < pkg->cfg->screen_width)
+		if (spri.screen_x < 0 || (spri.screen_x >= pkg->cfg->screen_width))
+			return ;
+		if (pkg->z_buffer[spri.screen_x] <= obj->dist)
+			return ;
+		pkg->z_buffer[spri.screen_x] = obj->dist;
+		while (++spri.ly < obj->height)
 		{
-			if (pkg->z_buffer[spri.screen_x] > obj->dist)
-			{
-				pkg->z_buffer[spri.screen_x] = obj->dist;
-				while (++spri.ly < obj->height)
-				{
-					spri.sample_y = spri.ly / obj->height;
-					if (spri.ly + obj->ceiling >= 0
-							&& spri.screen_x < pkg->cfg->screen_width
-							&& spri.ly + obj->ceiling < pkg->cfg->screen_width)
-						ft_spri_pix(pkg->img, screen, &spri, obj->ceiling);
-				}
-			}
+			spri.sample_y = spri.ly / obj->height;
+			if (spri.ly + obj->ceiling >= 0
+					&& spri.ly + obj->ceiling < pkg->cfg->screen_width)
+				ft_spri_pix(pkg->img, screen, &spri, obj->ceiling);
 		}
-	}
-}
-
-void	ft_manage_obj(t_prm_pkg *pkg)
-{
-	t_pos_lst	*obj_lst;
-	t_obj		tmp_obj;
-
-	obj_lst = pkg->obj_lst;
-	while (obj_lst)
-	{
-		if (ft_is_inscrn(pkg->cfg, pkg->one, obj_lst->pos, &tmp_obj))
-			ft_paint_obj(pkg, &tmp_obj);
-		obj_lst = obj_lst->next;
 	}
 }

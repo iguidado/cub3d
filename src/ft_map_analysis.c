@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:39:36 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/04 15:46:09 by iguidado         ###   ########.fr       */
+/*   Updated: 2021/01/01 14:37:20 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,30 @@ int		ft_is_border_map(char **map, int x, int y)
 	return (0);
 }
 
-int		ft_cross_check_bound(t_config *cfg, int x, int y)
+int		ft_check_surrounding_rows(t_config *cfg, int x, int y)
 {
 	int i;
 
 	i = 0;
 	while (cfg->map.data[y - 1][i] && i < x + 2)
-	{
-		if (i > x - 2 && i < x + 2)
-		{
-			if (cfg->map.data[y - 1][i] == ' ')
-				return (1);
-		}
 		i++;
-	}
 	if (i < x + 2)
 		return (1);
+	while (--i > x - 2)
+	{
+		if (cfg->map.data[y - 1][i] == ' ')
+			return (1);
+	}
 	i = 0;
 	while (cfg->map.data[y + 1][i] && i < x + 2)
-	{
-		if (i > x - 2 && i < x + 2)
-		{
-			if (cfg->map.data[y - 1][i] == ' ')
-				return (1);
-		}
 		i++;
-	}
 	if (i < x + 2)
 		return (1);
+	while (--i > x - 2)
+	{
+		if (cfg->map.data[y + 1][i] == ' ')
+			return (1);
+	}
 	return (0);
 }
 
@@ -60,7 +56,7 @@ void	ft_check_tile_type(t_config *cfg, t_file_data *fdata, int x, int y)
 	{
 		if (ft_is_border_map(cfg->map.data, x, y))
 			ft_manage_parse_error(ERROR_MAP_OPEN_BOUNDARIES, cfg, fdata);
-		if (ft_cross_check_bound(cfg, x, y))
+		if (ft_check_surrounding_rows(cfg, x, y))
 			ft_manage_parse_error(ERROR_MAP_OPEN_BOUNDARIES, cfg, fdata);
 	}
 }

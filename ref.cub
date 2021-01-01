@@ -1,13 +1,13 @@
-NO ./img/simple_answers.xpm
+NO ./img/no.xpm
 
 R 640 320
 
-SO ./img/nano.xpm
+SO ./img/so.xpm
 
-WE ./img/vim.xpm
+WE ./img/we.xpm
 
 
-EA ./img/emacs.xpm
+EA ./img/ea.xpm
 
 S ./mlx/test/open.xpm
 
