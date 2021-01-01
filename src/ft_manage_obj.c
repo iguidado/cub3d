@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 05:55:13 by iguidado          #+#    #+#             */
-/*   Updated: 2021/01/01 16:10:19 by iguidado         ###   ########.fr       */
+/*   Updated: 2021/01/01 21:55:02 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,6 @@ void	ft_complete_obj(t_config *cfg, t_img *img, t_obj *obj)
 	obj->width = obj->height / obj->a_ratio;
 	obj->middle = (0.5f * (obj->angle / (FOV / 2.0f)) + 0.5f)
 		* (float)cfg->screen_width;
-}
-
-#include <stdio.h>
-
-int	endl(char *str)
-{
-	int i;
-	int ret;
-
-	i = 0;
-	ret = 1;
-	while (str[i])
-		i++;
-	ret &= write(1, str, i);
-	ret &= write(1, "\n", i);
-	return (1);
 }
 
 void	ft_paint_obj(t_prm_pkg *pkg, t_obj *obj)

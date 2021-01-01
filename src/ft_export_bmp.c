@@ -6,11 +6,11 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 18:59:28 by iguidado          #+#    #+#             */
-/*   Updated: 2020/12/31 10:59:37 by iguidado         ###   ########.fr       */
+/*   Updated: 2021/01/01 22:56:09 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"cub3d.h"
+#include "cub3d.h"
 
 void		ft_write_pixmap(t_img *img, int fd)
 {
@@ -22,7 +22,8 @@ void		ft_write_pixmap(t_img *img, int fd)
 		i = 0;
 		while (i < img->img_width)
 		{
-			write(fd, &(img->img_data[(img->img_height * img->img_width * 4) + (i * 4)]), 4);
+			write(fd, &(img->img_data[(img->img_height * img->img_width * 4)
+						+ (i * 4)]), 4);
 			i++;
 		}
 		img->img_height--;
@@ -33,14 +34,14 @@ void		ft_init_bmp_hdr(t_img *img, t_bmp_header *hdr)
 {
 	hdr->type = 0x4d42;
 	hdr->offset = 54;
+	hdr->dib_header_size = 40;
 	hdr->image_size_bytes = (img->img_width * img->img_height * 4);
 	hdr->file_size = hdr->offset + hdr->image_size_bytes;
-	hdr->dib_header_size = 40;
 	hdr->res1 = 0;
 	hdr->res2 = 0;
 	hdr->width_px = img->img_width;
 	hdr->height_px = img->img_height;
-	hdr->bpp = 16;
+	hdr->bpp = 32;
 	hdr->compression = 0;
 	hdr->num_planes = 1;
 	hdr->num_colors = 0;
@@ -77,7 +78,7 @@ void		ft_export_bmp(t_img *img)
 	t_bmp_header	hdr;
 	unsigned char	*data;
 
-	fd = open("firstimage.bmp", O_CREAT|O_TRUNC|O_RDWR, S_IRWXU);
+	fd = open("firstimage.bmp", O_CREAT | O_TRUNC | O_RDWR, S_IRWXU);
 	ft_init_bmp_hdr(img, &hdr);
 	ft_write_bmp_hdr(fd, &hdr);
 	ft_write_pixmap(img, fd);
