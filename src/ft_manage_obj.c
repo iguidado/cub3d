@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 05:55:13 by iguidado          #+#    #+#             */
-/*   Updated: 2021/01/01 21:55:02 by iguidado         ###   ########.fr       */
+/*   Updated: 2021/01/02 13:56:31 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,22 @@
 void	ft_manage_obj(t_prm_pkg *pkg)
 {
 	t_pos_lst	*obj_lst;
-	t_obj		tmp_obj;
+	t_obj		obj;
+	int			spri_x;
 
 	obj_lst = pkg->obj_lst;
 	while (obj_lst)
 	{
-		if (ft_is_inscrn(pkg->cfg, pkg->one, obj_lst->pos, &tmp_obj))
-			ft_paint_obj(pkg, &tmp_obj);
+		if (ft_is_inscrn(pkg->cfg, pkg->one, obj_lst->pos, &obj))
+		{
+			ft_complete_obj(pkg->cfg, pkg->img, &obj);
+			spri_x = 0;
+			while (spri_x < obj.width)
+			{
+				ft_paint_spri_x(spri_x, pkg, &obj);
+				spri_x++;
+			}
+		}
 		obj_lst = obj_lst->next;
 	}
 }
@@ -80,30 +89,32 @@ void	ft_complete_obj(t_config *cfg, t_img *img, t_obj *obj)
 		* (float)cfg->screen_width;
 }
 
-void	ft_paint_obj(t_prm_pkg *pkg, t_obj *obj)
+void	ft_paint_spri_x(int	spri_x, t_prm_pkg *pkg, t_obj *obj)
 {
 	t_spri_coord	spri;
 	int				*screen;
 
-	ft_complete_obj(pkg->cfg, pkg->img, obj);
-	spri.lx = -1;
 	screen = (int *)pkg->img->img_data;
-	while (++spri.lx < obj->width)
+	spri.lx = spri_x;
+	spri.sample_x = spri.lx / obj->width;
+	spri.screen_x = (int)(obj->middle + spri.lx - (obj->width / 2.0f));
+	if (spri.screen_x < 0 || (spri.screen_x >= pkg->cfg->screen_width))
+		return ;
+	if (pkg->z_buffer[spri.screen_x] <= obj->dist)
+		return ;
+	pkg->z_buffer[spri.screen_x] = obj->dist;
+	spri.ly = 0;
+	while (++spri.ly < obj->height)
 	{
-		spri.ly = -1;
-		spri.sample_x = spri.lx / obj->width;
-		spri.screen_x = (int)(obj->middle + spri.lx - (obj->width / 2.0f));
-		if (spri.screen_x < 0 || (spri.screen_x >= pkg->cfg->screen_width))
-			return ;
-		if (pkg->z_buffer[spri.screen_x] <= obj->dist)
-			return ;
-		pkg->z_buffer[spri.screen_x] = obj->dist;
-		while (++spri.ly < obj->height)
-		{
-			spri.sample_y = spri.ly / obj->height;
-			if (spri.ly + obj->ceiling >= 0
-					&& spri.ly + obj->ceiling < pkg->cfg->screen_width)
-				ft_spri_pix(pkg->img, screen, &spri, obj->ceiling);
-		}
+		spri.sample_y = spri.ly / obj->height;
+		if (spri.ly + obj->ceiling >= 0
+				&& spri.ly + obj->ceiling < pkg->cfg->screen_width)
+			ft_spri_pix(pkg->img, screen, &spri, obj->ceiling);
 	}
+}
+
+void	ft_paint_obj(t_prm_pkg *pkg, t_obj *obj)
+{
+	int				spri_x;
+
 }

@@ -19,6 +19,7 @@ N_SRC = main.c\
 		ft_add_map.c\
 		ft_map_analysis.c\
 		ft_load_game.c\
+		ft_inputs.c\
 		ft_render_screen.c\
 		ft_manage_block.c\
 		ft_manage_error.c\

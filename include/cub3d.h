@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 11:38:30 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/07 16:19:53 by iguidado         ###   ########.fr       */
+/*   Updated: 2021/01/02 13:59:07 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,18 @@ t_player	ft_preset_player(t_config *cfg);
 t_pos_lst	*ft_load_obj(t_obj_spwn *obj_list);
 
 /*
+**	ft_inputs : function hooked by input
+**	also input conditioned function in main loop
+*/
+
+
+int			ft_get_input(int keycode, void *param);
+int			ft_release_input(int keycode, void *param);
+void		ft_move_player(t_player *one);
+void		ft_escape_game(t_prm_pkg *cub);
+int			ft_prep_escape(t_prm_pkg *pkg);
+
+/*
 **	ft_render_screen :
 **	Render the game aka img.data
 **	manipulation and raycasting
@@ -270,7 +282,7 @@ float		ft_get_sample_y(int i, int scrn_width, int ceiling, int floor);
 int			ft_is_inscrn(t_config *cfg, t_player *one, t_fdot pos, t_obj *obj);
 void		ft_complete_obj(t_config *cfg, t_img *img, t_obj *obj);
 void		ft_spri_pix(t_img *img, int *screen, t_spri_coord *spri, int ceil);
-void		ft_paint_obj(t_prm_pkg *pkg, t_obj *obj);
+void		ft_paint_spri_x(int	spri_x, t_prm_pkg *pkg, t_obj *obj);
 void		ft_manage_obj(t_prm_pkg *pkg);
 
 /*
