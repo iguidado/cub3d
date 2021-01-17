@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 05:55:13 by iguidado          #+#    #+#             */
-/*   Updated: 2021/01/02 13:56:31 by iguidado         ###   ########.fr       */
+/*   Updated: 2021/01/17 16:56:27 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	ft_spri_pix(t_img *img, int *screen, t_spri_coord *spri, int ceil)
 	int *spri_text;
 
 	pix_x = (int)(spri->sample_x * img->spri_text.width);
-	pix_y = (int)(spri->sample_y * img->spri_text.height)
-		* img->spri_text.height;
+	pix_y = (int)(spri->sample_y * img->spri_text.width)
+		* img->spri_text.width;
 	y = (int)(spri->ly + ceil) * img->img_width;
 	spri_text = ((int *)img->spri_text.data);
 	if (spri_text[pix_x + pix_y])
