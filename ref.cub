@@ -9,7 +9,7 @@ WE ./img/we.xpm
 
 EA ./img/ea.xpm
 
-S /home/user42//Bureau/sprite.xpm
+S ./img/sprite.xpm
 
 C 33,33,222
 
