@@ -73,6 +73,8 @@ int			main(int ac, char **av)
 	setup_cfg = ft_get_config(&fdata);
 	ft_add_map(&setup_cfg, &fdata);
 	ft_wipe_file_data(&fdata);
+
+printf("%s = %s\n", __FUNCTION__, "salut");
 	if (ac > 2)
 		if (ft_strequ(av[2], "--save"))
 			setup_cfg.mask = 0;

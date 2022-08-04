@@ -60,9 +60,12 @@ void	ft_print_error_id(int errnum, t_config *cfg, t_file_data *fdata)
 	ft_putstr_fd("Line [", 2);
 	ft_putstr_fd(tmp, 2);
 	free(tmp);
-	ft_putstr_fd("] \"", 2);
-	ft_putstr_fd(*fdata->paramlist, 2);
-	ft_putchar_fd('\"', 2);
+	if (fdata->paramlist)
+	{
+		ft_putstr_fd("] \"", 2);
+		ft_putstr_fd(*fdata->paramlist, 2);
+		ft_putchar_fd('\"', 2);
+	}
 	if (errnum == ERROR_DUPLICATE)
 	{
 		ft_putendl_fd(" : There is already a configuration with this ID", 2);

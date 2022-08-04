@@ -73,7 +73,7 @@ t_player	ft_preset_player(t_config *cfg)
 	new.key_id[INPUT_LEFT] = KEY_LEFT;
 	new.key_id[INPUT_RIGHT] = KEY_RIGHT;
 	new.key_id[INPUT_ESC] = KEY_ESC;
-	ft_memset(new.input, sizeof(new.input), 0);
+	ft_memset(new.input, 0, sizeof(new.input));
 	return (new);
 }
 
