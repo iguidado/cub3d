@@ -71,7 +71,7 @@ $(NAME) : $(P_OBJ) $(N_LIB) $(N_MLX) $(N_GNL)
 	$(CC) -o $(NAME) $(FLAGS) $(P_OBJ) $(INC_FLAG) $(P_LIB) $(P_MLX) $(P_GNL)
 
 %.o : %.c $(P_INC)
-	$(CC) $(INC_OBJ) -o $@ -c $<
+	$(CC) $(DFLAG) $(INC_OBJ) -o $@ -c $<
 
 $(N_LIB) : $(D_LIB)
 	make -C $(D_LIB)

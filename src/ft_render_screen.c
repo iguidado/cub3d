@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 06:13:29 by iguidado          #+#    #+#             */
-/*   Updated: 2021/01/01 15:04:41 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 15:24:48 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int		ft_render_screen(void *param)
 	if (pkg->cfg->mask == 2)
 		ft_escape_game(pkg);
 	ft_raycasting(pkg);
-	ft_manage_obj(pkg);
+//	ft_manage_obj(pkg);
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
 	return (0);
 }

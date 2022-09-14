@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:21 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/05 16:58:13 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 15:25:36 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	ft_wipe_cfg(t_config *cfg)
 		free(cfg->spri_text);
 	if (cfg->map.data)
 		ft_free_tab(&cfg->map.data);
-	if (cfg->obj_list)
-		ft_wipe_obj_spwn(&cfg->obj_list);
+//	if (cfg->obj_list)
+//		ft_wipe_obj_spwn(&cfg->obj_list);
 	cfg->no_text = NULL;
 	cfg->ea_text = NULL;
 	cfg->so_text = NULL;

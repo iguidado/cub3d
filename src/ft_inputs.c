@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 23:27:14 by iguidado          #+#    #+#             */
-/*   Updated: 2021/01/01 23:27:16 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 15:32:34 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		ft_escape_game(t_prm_pkg *cub)
 	ft_putendl("escaping game");
 	free(cub->z_buffer);
 	ft_wipe_cfg(cub->cfg);
-	ft_wipe_obj(&cub->obj_lst);
+//	ft_wipe_obj(&cub->obj_lst);
 	ft_wipe_img(cub->img);
 	exit(EXIT_SUCCESS);
 }

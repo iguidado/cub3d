@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 07:30:55 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/09 07:30:57 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 15:45:53 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int			ft_get_floor(t_config *cfg, t_file_data *fdata)
 		if (nbr > 255)
 			ft_manage_parse_error(ERROR_LEXICAL, cfg, fdata);
 		cfg->floor_color = (cfg->floor_color << 8) + nbr;
-		i++;
+		if (fdata->paramlist[1][i])
+			i++;
 	}
 	return (FLAG_FLOOR);
 }
