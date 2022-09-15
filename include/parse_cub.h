@@ -154,4 +154,12 @@ void		ft_process_map(t_config *cfg, t_file_data *fdata);
 void		ft_get_spawn(t_config *cfg, t_file_data *fdata, int x, int y);
 void		ft_add_obj(t_config *cfg, t_file_data *fdata, int x, int y);
 
+/*
+** Add map utils
+*/
+
+void	ft_process_tile(t_config *cfg, t_file_data *fdata, int x, int y);
+int		ft_add_row(char ***ptr_map, char *row);
+void	ft_get_spawn(t_config *cfg, t_file_data *fdata, int x, int y);
+
 #endif

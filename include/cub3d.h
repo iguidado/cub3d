@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 11:38:30 by iguidado          #+#    #+#             */
-/*   Updated: 2021/01/02 13:59:07 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:26:23 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,16 +274,6 @@ t_block		ft_get_block(t_config *cfg, t_ray_x *ray, t_player *one);
 void		ft_add_wall_to_block(t_img *img, t_block *block);
 int			ft_get_wall_pixel(float sample_y, t_block *block);
 float		ft_get_sample_y(int i, int scrn_width, int ceiling, int floor);
-
-/*
-**	ft_manage_obj
-*/
-
-int			ft_is_inscrn(t_config *cfg, t_player *one, t_fdot pos, t_obj *obj);
-void		ft_complete_obj(t_config *cfg, t_img *img, t_obj *obj);
-void		ft_spri_pix(t_img *img, int *screen, t_spri_coord *spri, int ceil);
-void		ft_paint_spri_x(int	spri_x, t_prm_pkg *pkg, t_obj *obj);
-void		ft_manage_obj(t_prm_pkg *pkg);
 
 /*
 **	ft_print_data

@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 16:26:44 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:23:46 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,6 @@ void	ft_launch_game(t_config cfg)
 	pkg.z_buffer = malloc(sizeof(float) * img.img_width + 1);
 	ft_render_screen((void *)&pkg);
 	printf("%i, %i\n", cfg.map.res.x, cfg.map.res.y);
-	if (!cfg.mask)
-	{
-		ft_render_screen((void *)&pkg);
-		ft_export_bmp(&img);
-		ft_escape_game(&pkg);
-	}
 	mlx_hook(img.win_ptr, 17, (1L << 17), &ft_prep_escape, &pkg);
 	mlx_hook(img.win_ptr, 2, (1L << 0), ft_get_input, &pkg);
 	mlx_hook(img.win_ptr, 3, 2, ft_release_input, &pkg);
@@ -72,9 +66,6 @@ int	main(int ac, char **av)
 	setup_cfg = ft_get_config(&fdata);
 	ft_add_map(&setup_cfg, &fdata);
 	ft_wipe_file_data(&fdata);
-	if (ac > 2)
-		if (ft_strequ(av[2], "--save"))
-			setup_cfg.mask = 0;
 	ft_print_tab(setup_cfg.map.data);
 	ft_launch_game(setup_cfg);
 	ft_print_fdata(&fdata);
