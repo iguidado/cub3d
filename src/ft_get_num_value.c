@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 07:30:55 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 17:42:14 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:10:06 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_get_res(t_config *cfg, t_file_data *fdata)
 
 void	ft_check_color(t_config *cfg, t_file_data *fdata, int flag)
 {
-	if (cfg->mask & FLAG_CEIL)
+	if (cfg->mask & flag)
 		ft_manage_parse_error(ERROR_DUPLICATE, cfg, fdata);
 	if (ft_count_param(fdata->paramlist) != 2)
 		ft_manage_parse_error(ERROR_SYNTAX, cfg, fdata);

@@ -24,7 +24,6 @@ N_SRC = main.c\
 		ft_render_screen.c\
 		ft_manage_block.c\
 		ft_manage_error.c\
-		ft_manage_obj.c\
 		ft_unit_test.c\
 		ft_wipe.c
 
@@ -63,8 +62,9 @@ CC = clang
 WFLAG = -Wall -Werror -Wall
 DFLAG = -g3 -fsanitize=address
 INC_OBJ = -I$(D_INC) -I$(D_MLX) -I$(D_LIB)/include -I$(D_GNL)
-INC_FLAG = $(INC_OBJ) -lXext -lX11 -lbsd
-FLAGS = $(WFLAG) $(DFLAG)
+INC_FLAG = $(INC_OBJ) -lXext -lX11 -lbsd -lm
+FLAGS = $(WFLAG)
+#FLAGS += $(DFLAG)
 
 all : $(NAME)
 
@@ -72,7 +72,7 @@ $(NAME) : $(P_OBJ) $(N_LIB) $(N_MLX) $(N_GNL)
 	$(CC) -o $(NAME) $(FLAGS) $(P_OBJ) $(INC_FLAG) $(P_LIB) $(P_MLX) $(P_GNL)
 
 %.o : %.c $(P_INC)
-	$(CC) $(DFLAG) $(INC_OBJ) -o $@ -c $<
+	$(CC) $(INC_OBJ) -o $@ -c $<
 
 $(N_LIB) : $(D_LIB)
 	make -C $(D_LIB)
