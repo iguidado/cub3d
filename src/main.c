@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 15:53:24 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:26:44 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	ft_launch_game(t_config cfg)
 
 	one = ft_preset_player(&cfg);
 	img = ft_preset_img(&cfg);
-	//	obj_lst = ft_load_obj(cfg.obj_list);
 	pkg = ft_pkg_prm(&cfg, &img, &one, &obj_lst);
 	pkg.z_buffer = malloc(sizeof(float) * img.img_width + 1);
 	ft_render_screen((void *)&pkg);
@@ -73,7 +72,6 @@ int	main(int ac, char **av)
 	setup_cfg = ft_get_config(&fdata);
 	ft_add_map(&setup_cfg, &fdata);
 	ft_wipe_file_data(&fdata);
-
 	if (ac > 2)
 		if (ft_strequ(av[2], "--save"))
 			setup_cfg.mask = 0;

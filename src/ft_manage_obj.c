@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 05:55:13 by iguidado          #+#    #+#             */
-/*   Updated: 2021/01/17 16:56:27 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:43:45 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_manage_obj(t_prm_pkg *pkg)
 	}
 }
 
-int		ft_is_inscrn(t_config *cfg, t_player *one, t_fdot pos, t_obj *obj)
+int	ft_is_inscrn(t_config *cfg, t_player *one, t_fdot pos, t_obj *obj)
 {
 	float	vec_x;
 	float	vec_y;
@@ -63,10 +63,10 @@ int		ft_is_inscrn(t_config *cfg, t_player *one, t_fdot pos, t_obj *obj)
 
 void	ft_spri_pix(t_img *img, int *screen, t_spri_coord *spri, int ceil)
 {
-	int y;
-	int pix_x;
+	int	y;
+	int	pix_x;
 	int	pix_y;
-	int *spri_text;
+	int	*spri_text;
 
 	pix_x = (int)(spri->sample_x * img->spri_text.width);
 	pix_y = (int)(spri->sample_y * img->spri_text.width)
@@ -89,7 +89,7 @@ void	ft_complete_obj(t_config *cfg, t_img *img, t_obj *obj)
 		* (float)cfg->screen_width;
 }
 
-void	ft_paint_spri_x(int	spri_x, t_prm_pkg *pkg, t_obj *obj)
+void	ft_paint_spri_x(int spri_x, t_prm_pkg *pkg, t_obj *obj)
 {
 	t_spri_coord	spri;
 	int				*screen;
@@ -108,13 +108,7 @@ void	ft_paint_spri_x(int	spri_x, t_prm_pkg *pkg, t_obj *obj)
 	{
 		spri.sample_y = spri.ly / obj->height;
 		if (spri.ly + obj->ceiling >= 0
-				&& spri.ly + obj->ceiling < pkg->cfg->screen_width)
+			&& spri.ly + obj->ceiling < pkg->cfg->screen_width)
 			ft_spri_pix(pkg->img, screen, &spri, obj->ceiling);
 	}
-}
-
-void	ft_paint_obj(t_prm_pkg *pkg, t_obj *obj)
-{
-	int				spri_x;
-
 }

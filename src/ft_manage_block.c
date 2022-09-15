@@ -6,17 +6,17 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:41:47 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/09 18:47:52 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:32:36 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float		ft_get_sample_y(int i, int scrn_width, int ceiling, int floor)
+float	ft_get_sample_y(int i, int scrn_width, int ceiling, int floor)
 {
-	float y;
-	float wall_y;
-	float sample_y;
+	float	y;
+	float	wall_y;
+	float	sample_y;
 
 	y = (float)(i / scrn_width);
 	wall_y = y - (float)ceiling;
@@ -24,7 +24,7 @@ float		ft_get_sample_y(int i, int scrn_width, int ceiling, int floor)
 	return (sample_y);
 }
 
-int			ft_get_wall_pixel(float sample_y, t_block *block)
+int	ft_get_wall_pixel(float sample_y, t_block *block)
 {
 	int	pixel_color;
 	int	*wall_sprite;
@@ -38,7 +38,7 @@ int			ft_get_wall_pixel(float sample_y, t_block *block)
 	return (pixel_color);
 }
 
-void		ft_add_wall_to_block(t_img *img, t_block *block)
+void	ft_add_wall_to_block(t_img *img, t_block *block)
 {
 	if (block->test_angle >= -M_PI * 0.25f && block->test_angle < M_PI * 0.25)
 	{
@@ -62,7 +62,7 @@ void		ft_add_wall_to_block(t_img *img, t_block *block)
 	}
 }
 
-t_block		ft_get_block(t_config *cfg, t_ray_x *ray, t_player *one)
+t_block	ft_get_block(t_config *cfg, t_ray_x *ray, t_player *one)
 {
 	t_block	block;
 
@@ -74,6 +74,6 @@ t_block		ft_get_block(t_config *cfg, t_ray_x *ray, t_player *one)
 	block.midpoint.x = (float)ray->test_x + 0.5f;
 	block.midpoint.y = (float)ray->test_y + 0.5f;
 	block.test_angle = atan2f(block.hitpoint.y - block.midpoint.y,
-				block.hitpoint.x - block.midpoint.x);
+			block.hitpoint.x - block.midpoint.x);
 	return (block);
 }

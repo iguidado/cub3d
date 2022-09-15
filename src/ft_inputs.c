@@ -6,13 +6,13 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 23:27:14 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 15:32:34 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:35:49 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			ft_get_input(int keycode, void *param)
+int	ft_get_input(int keycode, void *param)
 {
 	int			i;
 	t_prm_pkg	*pkg;
@@ -28,7 +28,7 @@ int			ft_get_input(int keycode, void *param)
 	return (0);
 }
 
-int			ft_release_input(int keycode, void *param)
+int	ft_release_input(int keycode, void *param)
 {
 	int			i;
 	t_prm_pkg	*pkg;
@@ -44,7 +44,7 @@ int			ft_release_input(int keycode, void *param)
 	return (0);
 }
 
-void		ft_move_player(t_player *one)
+void	ft_move_player(t_player *one)
 {
 	if (one->input[INPUT_LEFT])
 		one->angle += 0.1f;
@@ -72,17 +72,16 @@ void		ft_move_player(t_player *one)
 	}
 }
 
-void		ft_escape_game(t_prm_pkg *cub)
+void	ft_escape_game(t_prm_pkg *cub)
 {
 	ft_putendl("escaping game");
 	free(cub->z_buffer);
 	ft_wipe_cfg(cub->cfg);
-//	ft_wipe_obj(&cub->obj_lst);
 	ft_wipe_img(cub->img);
 	exit(EXIT_SUCCESS);
 }
 
-int			ft_prep_escape(t_prm_pkg *pkg)
+int	ft_prep_escape(t_prm_pkg *pkg)
 {
 	pkg->one->input[INPUT_ESC] = true;
 	return (0);

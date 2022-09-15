@@ -6,15 +6,15 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 18:59:28 by iguidado          #+#    #+#             */
-/*   Updated: 2021/01/01 22:56:09 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:53:27 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		ft_write_pixmap(t_img *img, int fd)
+void	ft_write_pixmap(t_img *img, int fd)
 {
-	int i;
+	int	i;
 
 	img->img_height--;
 	while (img->img_height >= 0)
@@ -23,14 +23,14 @@ void		ft_write_pixmap(t_img *img, int fd)
 		while (i < img->img_width)
 		{
 			write(fd, &(img->img_data[(img->img_height * img->img_width * 4)
-						+ (i * 4)]), 4);
+					+ (i * 4)]), 4);
 			i++;
 		}
 		img->img_height--;
 	}
 }
 
-void		ft_init_bmp_hdr(t_img *img, t_bmp_header *hdr)
+void	ft_init_bmp_hdr(t_img *img, t_bmp_header *hdr)
 {
 	hdr->type = 0x4d42;
 	hdr->offset = 54;
@@ -52,7 +52,7 @@ void		ft_init_bmp_hdr(t_img *img, t_bmp_header *hdr)
 	hdr->important_colors = 0;
 }
 
-void		ft_write_bmp_hdr(int fd, t_bmp_header *hdr)
+void	ft_write_bmp_hdr(int fd, t_bmp_header *hdr)
 {
 	write(fd, ((char *)&hdr->type), sizeof(hdr->type));
 	write(fd, ((char *)&hdr->file_size), sizeof(hdr->file_size));
@@ -72,7 +72,7 @@ void		ft_write_bmp_hdr(int fd, t_bmp_header *hdr)
 	write(fd, ((char *)&hdr->important_colors), sizeof(hdr->important_colors));
 }
 
-void		ft_export_bmp(t_img *img)
+void	ft_export_bmp(t_img *img)
 {
 	int				fd;
 	t_bmp_header	hdr;

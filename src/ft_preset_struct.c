@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2020/12/31 15:38:53 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:08:43 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 t_file_data	ft_preset_fdata(int ac, char **av)
 {
-	t_file_data fdata;
+	t_file_data	fdata;
 
 	if (ac < 2 || ac > 4)
 	{
 		ft_putendl("Error\nBad nbr of argument");
 		exit(EXIT_FAILURE);
 	}
-	if ((fdata.fd = open(av[1], O_RDONLY)) < 0)
+	fdata.fd = open(av[1], O_RDONLY);
+	if ((fdata.fd) < 0)
 	{
 		perror(av[1]);
 		exit(errno);
@@ -35,7 +36,7 @@ t_file_data	ft_preset_fdata(int ac, char **av)
 
 t_config	ft_preset_config(void)
 {
-	t_config new;
+	t_config	new;
 
 	new.mask = 0;
 	new.screen_width = -1;
@@ -59,7 +60,7 @@ t_config	ft_preset_config(void)
 
 t_player	ft_preset_player(t_config *cfg)
 {
-	t_player new;
+	t_player	new;
 
 	new.x = ((float)cfg->spwn.pos.x) + 0.5f;
 	new.y = ((float)cfg->spwn.pos.y) + 0.5f;
@@ -77,7 +78,7 @@ t_player	ft_preset_player(t_config *cfg)
 	return (new);
 }
 
-t_img		ft_preset_img(t_config *cfg)
+t_img	ft_preset_img(t_config *cfg)
 {
 	t_img	new;
 	t_dot	res_max;
@@ -91,10 +92,10 @@ t_img		ft_preset_img(t_config *cfg)
 		cfg->screen_width = res_max.y;
 	if (res_max.x < cfg->screen_height)
 		cfg->screen_height = res_max.x;
-	new.win_ptr = mlx_new_window(new.mlx_ptr, cfg->screen_width
-			, cfg->screen_height, "cub3d");
-	new.img_ptr = mlx_new_image(new.mlx_ptr, cfg->screen_width
-			, cfg->screen_height);
+	new.win_ptr = mlx_new_window(new.mlx_ptr, cfg->screen_width,
+			cfg->screen_height, "cub3d");
+	new.img_ptr = mlx_new_image(new.mlx_ptr, cfg->screen_width,
+			cfg->screen_height);
 	new.img_width = cfg->screen_width;
 	new.img_height = cfg->screen_height;
 	new.img_data = mlx_get_data_addr(new.img_ptr, &bpp, &linelen, &endian);
@@ -108,7 +109,7 @@ t_img		ft_preset_img(t_config *cfg)
 
 t_prm_pkg	ft_pkg_prm(t_config *cfg, t_img *img, t_player *pl, t_pos_lst **obj)
 {
-	t_prm_pkg new;
+	t_prm_pkg	new;
 
 	new.cfg = cfg;
 	new.img = img;

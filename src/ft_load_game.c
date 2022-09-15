@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:43:50 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/09 18:46:40 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:35:18 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_pos_lst	*ft_load_obj(t_obj_spwn *obj_list)
 {
-	t_pos_lst *new_list;
-	t_pos_lst *current_node;
+	t_pos_lst	*new_list;
+	t_pos_lst	*current_node;
 
 	if (!obj_list)
 		return (NULL);
@@ -32,17 +32,17 @@ t_pos_lst	*ft_load_obj(t_obj_spwn *obj_list)
 	return (new_list);
 }
 
-t_text		ft_load_text(t_img *img, char *text_name)
+t_text	ft_load_text(t_img *img, char *text_name)
 {
 	t_text	new;
 	int		endian;
 	int		bpp;
 	int		line_size;
 
-	new.ptr = mlx_xpm_file_to_image(img->mlx_ptr, text_name
-			, &new.width, &new.height);
+	new.ptr = mlx_xpm_file_to_image(img->mlx_ptr, text_name,
+			&new.width, &new.height);
 	new.data = mlx_get_data_addr(new.ptr, &bpp, &line_size, &endian);
-	printf("load %s : width = %i height = %i\n"
-			, text_name, new.width, new.height);
+	printf("load %s : width = %i height = %i\n",
+		text_name, new.width, new.height);
 	return (new);
 }

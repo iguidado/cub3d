@@ -6,13 +6,13 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:30:31 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 15:40:21 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:56:09 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			ft_line_is_empty(char *line)
+int	ft_line_is_empty(char *line)
 {
 	while (*line)
 	{
@@ -23,9 +23,9 @@ int			ft_line_is_empty(char *line)
 	return (1);
 }
 
-int			ft_line_is_map(char *line)
+int	ft_line_is_map(char *line)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	while (*line)
@@ -39,9 +39,9 @@ int			ft_line_is_map(char *line)
 	return (ret);
 }
 
-int			ft_count_param(char **param)
+int	ft_count_param(char **param)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (param[i])
@@ -49,7 +49,7 @@ int			ft_count_param(char **param)
 	return (i);
 }
 
-int			ft_str_isdigit(char *str)
+int	ft_str_isdigit(char *str)
 {
 	while (*str)
 	{
@@ -60,10 +60,10 @@ int			ft_str_isdigit(char *str)
 	return (1);
 }
 
-int			ft_str_is_colorcode(char *str)
+int	ft_str_is_colorcode(char *str)
 {
-	int i_comma;
-	int nbr;
+	int	i_comma;
+	int	nbr;
 
 	i_comma = 0;
 	while (*str)

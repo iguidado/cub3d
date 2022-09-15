@@ -6,13 +6,13 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:39:36 by iguidado          #+#    #+#             */
-/*   Updated: 2021/01/01 14:37:20 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:53:51 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		ft_is_border_map(char **map, int x, int y)
+int	ft_is_border_map(char **map, int x, int y)
 {
 	if (x == 0 || y == 0 || !map[y + 1])
 		return (1);
@@ -23,9 +23,9 @@ int		ft_is_border_map(char **map, int x, int y)
 	return (0);
 }
 
-int		ft_check_surrounding_rows(t_config *cfg, int x, int y)
+int	ft_check_surrounding_rows(t_config *cfg, int x, int y)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cfg->map.data[y - 1][i] && i < x + 2)

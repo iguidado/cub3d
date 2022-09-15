@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:21 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 15:25:36 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:36:22 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_wipe_obj_spwn(t_obj_spwn **obj_lst)
 {
-	t_obj_spwn *next;
+	t_obj_spwn	*next;
 
 	while (*obj_lst)
 	{
@@ -26,7 +26,7 @@ void	ft_wipe_obj_spwn(t_obj_spwn **obj_lst)
 
 void	ft_wipe_obj(t_pos_lst **obj_lst)
 {
-	t_pos_lst *next;
+	t_pos_lst	*next;
 
 	while (*obj_lst)
 	{
@@ -50,8 +50,6 @@ void	ft_wipe_cfg(t_config *cfg)
 		free(cfg->spri_text);
 	if (cfg->map.data)
 		ft_free_tab(&cfg->map.data);
-//	if (cfg->obj_list)
-//		ft_wipe_obj_spwn(&cfg->obj_list);
 	cfg->no_text = NULL;
 	cfg->ea_text = NULL;
 	cfg->so_text = NULL;
