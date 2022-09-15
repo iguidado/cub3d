@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 11:38:30 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/15 16:26:23 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:01:15 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,32 +102,6 @@ typedef struct	s_img
 	t_text	spri_text;
 }				t_img;
 
-typedef struct	s_bmp_header
-{
-	unsigned short	type;
-	unsigned int	file_size;
-	unsigned short	res1;
-	unsigned short	res2;
-	unsigned int	offset;
-	unsigned int	dib_header_size;
-	int				width_px;
-	int				height_px;
-	unsigned short	num_planes;
-	unsigned short	bpp;
-	unsigned int	compression;
-	unsigned int	image_size_bytes;
-	int				x_resolution_ppm;
-	int				y_resolution_ppm;
-	unsigned int	num_colors;
-	unsigned int	important_colors;
-}				t_bmp_header;
-
-typedef struct	s_bmp_image
-{
-	t_bmp_header	header;
-	unsigned char	*data;
-}				t_bmp_image;
-
 typedef	struct	s_player
 {
 	float	x;
@@ -149,6 +123,15 @@ typedef	struct	s_ray_x
 	int		test_x;
 	int		test_y;
 }				t_ray_x;
+
+typedef	struct	s_ray
+{
+	double	camera;
+	double	dir;
+	double	sideDist;
+	double	deltaDist;
+	int		step;
+}				t_ray;
 
 /*
 **	No need to clean block since wall_text is part of t_img
@@ -282,14 +265,5 @@ float		ft_get_sample_y(int i, int scrn_width, int ceiling, int floor);
 void		ft_print_fdata(t_file_data *fdata);
 void		ft_print_cfg(t_config *cfg);
 void		ft_print_obj(t_obj_spwn *obj_list);
-
-/*
-** ft_export_bmp
-*/
-
-void		ft_export_bmp(t_img *img);
-void		ft_write_pixmap(t_img *img, int fd);
-void		ft_init_bmp_hdr(t_img *img, t_bmp_header *hdr);
-void		ft_write_bmp_hdr(int fd, t_bmp_header *hdr);
 
 #endif

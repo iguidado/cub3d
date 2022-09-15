@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 06:13:29 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/15 16:04:54 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:11:00 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int		ft_raycast(t_prm_pkg *cub, t_ray_x *ray)
 {
 	while (1)
 	{
-		ray->len += 0.01f;
+		ray->len += 0.005f;
 		ray->test_x = (int)(cub->one->x + ray->eye_x * ray->len);
 		ray->test_y = (int)(cub->one->y + ray->eye_y * ray->len);
 		if (ft_is_oob(&cub->cfg->map, ray->test_x, ray->test_y))
@@ -145,6 +145,34 @@ void	ft_raycasting(t_prm_pkg *cub)
 		ray.x++;
 	}
 }
+
+//	void	ft_set_rayX(t_prm_pkg *cub, t_ray *ray, int screenX)
+//	{
+//		double	cameraX;
+//	
+//		x.camera = 2 * screenX / (double)cub->cfg->screen_width - 1;
+//	
+//		ray.dir = 
+//	
+//	
+//	
+//	
+//	
+//		mapX  =	(int)cub->one->x;
+//	}
+//	
+//	void	ft_raycasting(t_prm_pkg *cub)
+//	{
+//		int	screenX;
+//		t_ray	x;
+//		t_ray	y;
+//	
+//		screenX = 0;
+//		while (screenX < cub->cfg->screen_width)
+//		{
+//			ray
+//		}
+//	}
 
 int		ft_render_screen(void *param)
 {

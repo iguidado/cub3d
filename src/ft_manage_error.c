@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:23:00 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 17:11:25 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/15 16:35:58 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@
 
 void	ft_print_error_file(int errnum, t_config *cfg, t_file_data *fdata)
 {
-	unsigned char	finished_process_mask;
-
-	finished_process_mask = 0;
 	if (errnum == ERROR_MISS_CONF)
 		ft_putendl_fd(" : missing configuration line", 2);
 	if (errnum == ERROR_FILE_END)
@@ -112,7 +109,6 @@ void	ft_print_error_map(int errnum, t_config *cfg, t_file_data *fdata)
 
 void	ft_manage_parse_error(int errnum, t_config *cfg, t_file_data *fdata)
 {
-	char			*tmp;
 	static void		(*error_ft[])(int, t_config *, t_file_data *)
 		= {&ft_print_error_file, &ft_print_error_id,
 		&ft_print_error_token, &ft_print_error_map};
