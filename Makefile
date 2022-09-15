@@ -64,7 +64,7 @@ DFLAG = -g3 -fsanitize=address
 INC_OBJ = -I$(D_INC) -I$(D_MLX) -I$(D_LIB)/include -I$(D_GNL)
 INC_FLAG = $(INC_OBJ) -lXext -lX11 -lbsd -lm
 FLAGS = $(WFLAG)
-#FLAGS += $(DFLAG)
+FLAGS += $(DFLAG)
 
 all : $(NAME)
 
@@ -72,7 +72,7 @@ $(NAME) : $(P_OBJ) $(N_LIB) $(N_MLX) $(N_GNL)
 	$(CC) -o $(NAME) $(FLAGS) $(P_OBJ) $(INC_FLAG) $(P_LIB) $(P_MLX) $(P_GNL)
 
 %.o : %.c $(P_INC)
-	$(CC) $(INC_OBJ) -o $@ -c $<
+	$(CC) $(FLAGS) $(INC_OBJ) -o $@ -c $<
 
 $(N_LIB) : $(D_LIB)
 	make -C $(D_LIB)
