@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 11:38:30 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/15 17:01:15 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 00:33:13 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@
 # define KEY_PRESS 1
 # define KEY_RELEASE 2
 # define EVENT_EXIT 17
+
+# define HEIGHT 800
+# define WIDTH	1200
 /*
 **	Structure for games
 */

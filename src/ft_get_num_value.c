@@ -6,25 +6,11 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 07:30:55 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/15 16:10:06 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 00:37:10 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	ft_get_res(t_config *cfg, t_file_data *fdata)
-{
-	if (cfg->mask & FLAG_RES)
-		ft_manage_parse_error(ERROR_DUPLICATE, cfg, fdata);
-	if (ft_count_param(fdata->paramlist) != 3)
-		ft_manage_parse_error(ERROR_SYNTAX, cfg, fdata);
-	if (!ft_str_isdigit(fdata->paramlist[1])
-		|| !ft_str_isdigit(fdata->paramlist[2]))
-		ft_manage_parse_error(ERROR_LEXICAL, cfg, fdata);
-	cfg->screen_width = ft_atoi(fdata->paramlist[1]);
-	cfg->screen_height = ft_atoi(fdata->paramlist[2]);
-	return (FLAG_RES);
-}
 
 void	ft_check_color(t_config *cfg, t_file_data *fdata, int flag)
 {

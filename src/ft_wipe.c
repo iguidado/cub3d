@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:21 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 17:36:22 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 00:41:40 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	ft_wipe_img(t_img *img)
 	mlx_destroy_image(img->mlx_ptr, img->so_text.ptr);
 	mlx_destroy_image(img->mlx_ptr, img->ea_text.ptr);
 	mlx_destroy_image(img->mlx_ptr, img->we_text.ptr);
-	mlx_destroy_image(img->mlx_ptr, img->spri_text.ptr);
 	mlx_destroy_image(img->mlx_ptr, img->img_ptr);
+	mlx_destroy_display(img->mlx_ptr);
 	free(img->mlx_ptr);
 }
 

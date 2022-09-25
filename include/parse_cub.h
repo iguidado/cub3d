@@ -11,14 +11,12 @@
 # define ID_NB 8
 enum
 {
-	FLAG_RES = 1,
-	FLAG_CEIL = 2,
-	FLAG_FLOOR = 4,
-	FLAG_NO = 8,
-	FLAG_SO = 16,
-	FLAG_WE = 32,
-	FLAG_EA = 64,
-	FLAG_SPRI = 128
+	FLAG_CEIL = 1,
+	FLAG_FLOOR = 2,
+	FLAG_NO = 4,
+	FLAG_SO = 8,
+	FLAG_WE = 16,
+	FLAG_EA = 32
 };
 
 typedef	struct	s_dot
@@ -152,7 +150,6 @@ void		ft_add_map(t_config *cfg, t_file_data *fdata);
 int			ft_add_row(char ***ptr_map, char *row);
 void		ft_process_map(t_config *cfg, t_file_data *fdata);
 void		ft_get_spawn(t_config *cfg, t_file_data *fdata, int x, int y);
-void		ft_add_obj(t_config *cfg, t_file_data *fdata, int x, int y);
 
 /*
 ** Add map utils

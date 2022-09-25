@@ -6,7 +6,7 @@
 /*   By: lescribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 16:48:43 by lescribe          #+#    #+#             */
-/*   Updated: 2022/09/15 16:35:34 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 01:15:23 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	ft_process_tile(t_config *cfg, t_file_data *fdata, int x, int y)
 	ft_check_tile_type(cfg, fdata, x, y);
 	if (ft_isset(SPAWN, cfg->map.data[y][x]))
 		ft_get_spawn(cfg, fdata, x, y);
-	if (cfg->map.data[y][x] == '2')
-		ft_add_obj(cfg, fdata, x, y);
 }
 
 int	ft_add_row(char ***ptr_map, char *row)

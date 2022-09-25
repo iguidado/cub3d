@@ -13,3 +13,4 @@ Constante used : keysymdef.h
 - [ ] Adapt to new subject
 	- [ ] Remove Sprite
 	- [ ] Remove manage of sprite and resolution in parsing
+

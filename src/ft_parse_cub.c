@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:29:21 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/15 16:09:35 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 00:34:04 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int	ft_data_to_cfg(t_config *cfg, t_file_data *fdata)
 {
 	int			i;
 	static char	id_array[ID_NB][3]
-		= {"R", "C", "F", "NO", "SO", "WE", "EA", "S"};
+		= {"C", "F", "NO", "SO", "WE", "EA"};
 	static int	(*array_ft[ID_NB])(t_config *, t_file_data *)
-		= {ft_get_res, ft_get_ceilar, ft_get_floor, ft_get_no_text,
-		ft_get_so_text, ft_get_we_text, ft_get_ea_text, ft_get_spri_text};
+		= {ft_get_ceilar, ft_get_floor, ft_get_no_text,
+		ft_get_so_text, ft_get_we_text, ft_get_ea_text};
 
 	if (fdata->paramlist)
 		ft_free_tab(&fdata->paramlist);
@@ -90,12 +90,14 @@ t_config	ft_get_config(t_file_data *fdata)
 	int				error_id;
 
 	cfg_new = ft_preset_config();
-	while (cfg_new.mask < 255)
+	while (cfg_new.mask < 63)
 	{
 		error_id = ft_get_next_param(fdata);
 		if ((error_id) >= 0)
 			ft_manage_parse_error(ERROR_ID, &cfg_new, fdata);
 		cfg_new.mask |= ft_data_to_cfg(&cfg_new, fdata);
 	}
+	cfg_new.screen_width = WIDTH;
+	cfg_new.screen_height = HEIGHT;
 	return (cfg_new);
 }

@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 17:08:43 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 00:35:51 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ t_img	ft_preset_img(t_config *cfg)
 	new.so_text = ft_load_text(&new, cfg->so_text);
 	new.ea_text = ft_load_text(&new, cfg->ea_text);
 	new.we_text = ft_load_text(&new, cfg->we_text);
-	new.spri_text = ft_load_text(&new, cfg->spri_text);
 	return (new);
 }
 

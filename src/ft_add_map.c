@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:48:19 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/15 16:35:17 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 01:15:20 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,6 @@
 /*
  **	Don't enter bad value, it will crash
  */
-
-void	ft_add_obj(t_config *cfg, t_file_data *fdata, int x, int y)
-{
-	t_obj_spwn	*new;
-
-	new = (t_obj_spwn *)malloc(sizeof(t_obj_spwn));
-	if (!new)
-		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
-	new->pos.x = x;
-	new->pos.y = y;
-	cfg->map.data[y][x] = '0';
-	new->next = cfg->obj_list;
-	cfg->obj_list = new;
-}
 
 /*
  **	can replace  ft_isset, to see if it is more performant
