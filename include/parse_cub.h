@@ -2,9 +2,9 @@
 # define PARSE_CUB_H
 
 # include <stdbool.h>
-# define TILES " 102NESW"
+# define TILES " 10NESW"
 # define WALLS "1"
-# define INTERIOR "02NESW"
+# define INTERIOR "0NESW"
 # define SPAWN "NESW"
 # define EXTERIOR " "
 
