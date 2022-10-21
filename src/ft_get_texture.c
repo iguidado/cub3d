@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 07:31:27 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/26 00:37:32 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 03:29:41 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	ft_get_no_text(t_config *cfg, t_file_data *fdata)
 	if ((tmp_fd) < 0)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	close(tmp_fd);
+	if (!ft_isxpm(fdata->paramlist[1]))
+		ft_manage_parse_error(ERROR_XPM, cfg, fdata);
 	cfg->no_text = ft_strdup(fdata->paramlist[1]);
 	return (FLAG_NO);
 }
@@ -40,6 +42,8 @@ int	ft_get_so_text(t_config *cfg, t_file_data *fdata)
 	if ((tmp_fd) < 0)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	close(tmp_fd);
+	if (!ft_isxpm(fdata->paramlist[1]))
+		ft_manage_parse_error(ERROR_XPM, cfg, fdata);
 	cfg->so_text = ft_strdup(fdata->paramlist[1]);
 	return (FLAG_SO);
 }
@@ -56,6 +60,8 @@ int	ft_get_we_text(t_config *cfg, t_file_data *fdata)
 	if ((tmp_fd) < 0)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	close(tmp_fd);
+	if (!ft_isxpm(fdata->paramlist[1]))
+		ft_manage_parse_error(ERROR_XPM, cfg, fdata);
 	cfg->we_text = ft_strdup(fdata->paramlist[1]);
 	return (FLAG_WE);
 }
@@ -72,6 +78,8 @@ int	ft_get_ea_text(t_config *cfg, t_file_data *fdata)
 	if ((tmp_fd) < 0)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	close(tmp_fd);
+	if (!ft_isxpm(fdata->paramlist[1]))
+		ft_manage_parse_error(ERROR_XPM, cfg, fdata);
 	cfg->ea_text = ft_strdup(fdata->paramlist[1]);
 	return (FLAG_EA);
 }

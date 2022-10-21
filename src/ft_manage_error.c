@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:23:00 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/15 16:35:58 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 03:39:29 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	ft_print_error_token(int errnum, t_config *cfg, t_file_data *fdata)
 		ft_putendl_fd(" : Bad number of argument written", 2);
 	else if (errnum == ERROR_LEXICAL)
 		ft_putendl_fd(" : Bad type of argument given", 2);
+	else if (errnum == ERROR_XPM)
+		ft_putendl_fd(" : File is not xpm", 2);
 }
 
 void	ft_print_error_map(int errnum, t_config *cfg, t_file_data *fdata)
@@ -118,6 +120,8 @@ void	ft_manage_parse_error(int errnum, t_config *cfg, t_file_data *fdata)
 	{
 		ft_putendl_fd(strerror(errno), 2);
 	}
+	else if (errnum == ERROR_XPM)
+		error_ft[2](errnum, cfg, fdata);
 	else if (errnum >= ERROR_MAP_PLAYER_SPAWN)
 		error_ft[3](errnum, cfg, fdata);
 	else

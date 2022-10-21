@@ -24,6 +24,7 @@ N_SRC = main.c\
 		ft_manage_block.c\
 		ft_manage_error.c\
 		ft_unit_test.c\
+		ft_utils.c\
 		ft_wipe.c
 
 #	ft_unit_test.c\

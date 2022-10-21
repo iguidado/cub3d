@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/26 00:35:51 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/09/26 02:27:23 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ t_file_data	ft_preset_fdata(int ac, char **av)
 	{
 		ft_putendl("Error\nBad nbr of argument");
 		exit(EXIT_FAILURE);
+	}
+	if (!ft_strendby(av[1], ".cub"))
+	{
+		ft_putendl_fd("file format is incorrect it should end by .cub", 2);
+		exit (1);
 	}
 	fdata.fd = open(av[1], O_RDONLY);
 	if ((fdata.fd) < 0)

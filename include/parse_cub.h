@@ -91,6 +91,7 @@ enum
 	ERROR_LEXICAL, ERROR_SYNTAX, 
 	ERROR_MAP_PLAYER_SPAWN, ERROR_MAP_EMPTY_LINE, 
 	ERROR_MAP_OPEN_BOUNDARIES, ERROR_MAP_BAD_TILE,
+	ERROR_XPM,
 	NB_OF_ERROR_FROM_CFG
 };
 
@@ -103,6 +104,12 @@ t_config	ft_get_config(t_file_data *fdata);
 int			ft_get_fd(int ac, char **av);
 int			ft_get_next_param(t_file_data *fdata);
 int			ft_fdata_to_cfg(t_config *cfg, t_file_data *fdata);
+
+/*
+** File checking
+*/
+bool		ft_strendby(char *str, char *end);
+bool		ft_isxpm(char	*filename);
 
 /*
 ** Get texture
