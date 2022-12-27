@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2022/10/21 13:59:52 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/12/27 02:58:10 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,31 +57,19 @@ void	ft_launch_game(t_config cfg)
 	mlx_loop(img.mlx_ptr);
 }
 
-	int	main(int ac, char **av)
-	{
-		t_file_data		fdata;
-		t_config		setup_cfg;
-	
-		fdata = ft_preset_fdata(ac, av);
-		setup_cfg = ft_get_config(&fdata);
-		ft_add_map(&setup_cfg, &fdata);
-		ft_wipe_file_data(&fdata);
-		ft_print_tab(setup_cfg.map.data);
-		ft_launch_game(setup_cfg);
-		ft_print_fdata(&fdata);
-		ft_print_cfg(&setup_cfg);
-		ft_wipe_cfg(&setup_cfg);
-		return (0);
-	}
+int	main(int ac, char **av)
+{
+	t_file_data		fdata;
+	t_config		setup_cfg;
 
-
-//	int	main(int ac, char **av)
-//	{
-//		if (ac < 2)
-//		{
-//			ft_putendl("Error");
-//			return (0);
-//		}
-//		ft_putnbr(ft_isxpm(av[1]));
-//	}
-
+	fdata = ft_preset_fdata(ac, av);
+	setup_cfg = ft_get_config(&fdata);
+	ft_add_map(&setup_cfg, &fdata);
+	ft_wipe_file_data(&fdata);
+	ft_print_tab(setup_cfg.map.data);
+	ft_launch_game(setup_cfg);
+	ft_print_fdata(&fdata);
+	ft_print_cfg(&setup_cfg);
+	ft_wipe_cfg(&setup_cfg);
+	return (0);
+}

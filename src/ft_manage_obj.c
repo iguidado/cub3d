@@ -85,7 +85,7 @@ void	ft_complete_obj(t_config *cfg, t_img *img, t_obj *obj)
 	obj->height = obj->floor - obj->ceiling;
 	obj->a_ratio = (float)img->spri_text.height / (float)img->spri_text.width;
 	obj->width = obj->height / obj->a_ratio;
-	obj->middle = (0.5f * (obj->angle / (FOV / 2.0f)) + 0.5f)
+	obj->middle = (0.5f * (obj->angle / ((M_PI / 4.0f) / 2.0f)) + 0.5f)
 		* (float)cfg->screen_width;
 }
 

@@ -70,7 +70,7 @@ t_player	ft_preset_player(t_config *cfg)
 	new.x = ((float)cfg->spwn.pos.x) + 0.5f;
 	new.y = ((float)cfg->spwn.pos.y) + 0.5f;
 	new.angle = cfg->spwn.angle;
-	new.fov = FOV;
+	new.fov = (M_PI / 4.0f);
 	new.speed = PLAYER_SPEED;
 	new.key_id[INPUT_W] = KEY_W;
 	new.key_id[INPUT_A] = KEY_A;

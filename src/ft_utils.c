@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/27 02:52:27 by iguidado          #+#    #+#             */
+/*   Updated: 2022/12/27 02:57:55 by iguidado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 #include <stdio.h>
 
 bool	ft_strendby(char *str, char *end)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = ft_strlen(str);
@@ -40,7 +52,7 @@ bool	ft_isxpm(char *input)
 		ret = true;
 		mlx_destroy_image(ptr, xpm_ptr);
 	}
-		mlx_destroy_display(ptr);
-		free(ptr);
+	mlx_destroy_display(ptr);
+	free(ptr);
 	return (ret);
 }

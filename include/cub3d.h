@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 11:38:30 by iguidado          #+#    #+#             */
-/*   Updated: 2022/10/24 19:36:55 by lescribe         ###   ########.fr       */
+/*   Updated: 2022/12/27 03:20:20 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@
 # define KEY_RIGHT 65361
 # define KEY_ESC 65307
 
-# define FOV (M_PI / 4.0f)
 # define PLAYER_SPEED 0.1f
 
 # define KEY_PRESS 1
@@ -70,19 +69,19 @@ typedef enum e_input
 	NB_INPUT
 }			t_input;
 
-typedef struct	s_fdot
+typedef struct s_fdot
 {
-	float x;
-	float y;
+	float	x;
+	float	y;
 }				t_fdot;
 
-typedef struct	s_pos_lst
+typedef struct s_pos_lst
 {
 	t_fdot				pos;
 	struct s_pos_lst	*next;
 }				t_pos_lst;
 
-typedef struct	s_text
+typedef struct s_text
 {
 	void	*ptr;
 	char	*data;
@@ -90,7 +89,7 @@ typedef struct	s_text
 	int		height;
 }				t_text;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -105,7 +104,7 @@ typedef struct	s_img
 	t_text	spri_text;
 }				t_img;
 
-typedef	struct	s_player
+typedef struct s_player
 {
 	float	x;
 	float	y;
@@ -116,23 +115,21 @@ typedef	struct	s_player
 	bool	input[NB_INPUT];
 }				t_player;
 
-typedef	struct	s_ray_x
+typedef struct s_ray_x
 {
 	int		x;
 	float	angle;
 	float	eye_x;
 	float	eye_y;
 	float	len;
-	float		test_x;
-	float		test_y;
+	float	test_x;
+	float	test_y;
 }				t_ray_x;
 
-typedef	struct	s_ray
+typedef struct s_ray
 {
 	double	camera;
 	double	dir;
-	double	sideDist;
-	double	deltaDist;
 	int		step;
 }				t_ray;
 
@@ -140,7 +137,7 @@ typedef	struct	s_ray
 **	No need to clean block since wall_text is part of t_img
 */
 
-typedef struct	s_block
+typedef struct s_block
 {
 	t_dot	pos;
 	t_fdot	midpoint;
@@ -150,7 +147,7 @@ typedef struct	s_block
 	t_text	*wall_text;
 }				t_block;
 
-typedef struct	s_obj
+typedef struct s_obj
 {
 	float	angle;
 	float	ceiling;
@@ -162,16 +159,16 @@ typedef struct	s_obj
 	float	dist;
 }				t_obj;
 
-typedef struct	s_spri_coord
+typedef struct s_spri_coord
 {
-	float ly;
-	float lx;
-	float sample_y;
-	float sample_x;
-	int screen_x;
+	float	ly;
+	float	lx;
+	float	sample_y;
+	float	sample_x;
+	int		screen_x;
 }				t_spri_coord;
 
-typedef struct	s_prm_pkg
+typedef struct s_prm_pkg
 {
 	t_config	*cfg;
 	t_img		*img;
@@ -186,7 +183,8 @@ typedef struct	s_prm_pkg
 
 t_file_data	ft_preset_fdata(int ac, char **av);
 t_config	ft_preset_config(void);
-t_prm_pkg	ft_pkg_prm(t_config *cfg, t_img *img, t_player *one, t_pos_lst **obj);
+t_prm_pkg	ft_pkg_prm(t_config *cfg, t_img *img,
+				t_player *one, t_pos_lst **obj);
 
 /*
 **	Load game
@@ -200,7 +198,6 @@ t_pos_lst	*ft_load_obj(t_obj_spwn *obj_list);
 **	ft_inputs : function hooked by input
 **	also input conditioned function in main loop
 */
-
 
 int			ft_get_input(int keycode, void *param);
 int			ft_release_input(int keycode, void *param);

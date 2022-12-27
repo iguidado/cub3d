@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_cub.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/27 03:22:06 by iguidado          #+#    #+#             */
+/*   Updated: 2022/12/27 03:22:07 by iguidado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_CUB_H
 # define PARSE_CUB_H
 
@@ -7,8 +19,8 @@
 # define INTERIOR "0NESW"
 # define SPAWN "NESW"
 # define EXTERIOR " "
-
 # define ID_NB 8
+
 enum
 {
 	FLAG_CEIL = 1,
@@ -19,21 +31,21 @@ enum
 	FLAG_EA = 32
 };
 
-typedef	struct	s_dot
+typedef struct s_dot
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }				t_dot;
 
-typedef struct	s_spawn
+typedef struct s_spawn
 {
 	struct s_dot	pos;
 	float			angle;
 }				t_spawn;
 
-typedef struct	s_obj_spwn
+typedef struct s_obj_spwn
 {
-	t_dot			pos;
+	t_dot				pos;
 	struct s_obj_spwn	*next;
 }		t_obj_spwn;
 
@@ -42,7 +54,7 @@ typedef struct	s_obj_spwn
 **	Don't try to free(name) as it is an argument so it's on the stack
 */
 
-typedef	struct	s_file_data
+typedef struct s_file_data
 {
 	char	*name;
 	int		fd;
@@ -56,13 +68,13 @@ typedef	struct	s_file_data
 ** 
 */
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char	**data;
 	t_dot	res;
 }				t_map;
 
-typedef struct	s_config
+typedef struct s_config
 {
 	unsigned char	mask;
 	int				screen_width;
@@ -85,12 +97,17 @@ typedef struct	s_config
 
 enum
 {
-	ERROR_SYSCALL, 
-	ERROR_FILE_END, ERROR_MISS_CONF,
-	ERROR_DUPLICATE, ERROR_ID,
-	ERROR_LEXICAL, ERROR_SYNTAX, 
-	ERROR_MAP_PLAYER_SPAWN, ERROR_MAP_EMPTY_LINE, 
-	ERROR_MAP_OPEN_BOUNDARIES, ERROR_MAP_BAD_TILE,
+	ERROR_SYSCALL,
+	ERROR_FILE_END,
+	ERROR_MISS_CONF,
+	ERROR_DUPLICATE,
+	ERROR_ID,
+	ERROR_LEXICAL,
+	ERROR_SYNTAX,
+	ERROR_MAP_PLAYER_SPAWN,
+	ERROR_MAP_EMPTY_LINE,
+	ERROR_MAP_OPEN_BOUNDARIES,
+	ERROR_MAP_BAD_TILE,
 	ERROR_XPM,
 	NB_OF_ERROR_FROM_CFG
 };
@@ -162,8 +179,8 @@ void		ft_get_spawn(t_config *cfg, t_file_data *fdata, int x, int y);
 ** Add map utils
 */
 
-void	ft_process_tile(t_config *cfg, t_file_data *fdata, int x, int y);
-int		ft_add_row(char ***ptr_map, char *row);
-void	ft_get_spawn(t_config *cfg, t_file_data *fdata, int x, int y);
+void		ft_process_tile(t_config *cfg, t_file_data *fdata, int x, int y);
+int			ft_add_row(char ***ptr_map, char *row);
+void		ft_get_spawn(t_config *cfg, t_file_data *fdata, int x, int y);
 
 #endif

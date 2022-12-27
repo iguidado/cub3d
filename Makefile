@@ -21,6 +21,7 @@ N_SRC = main.c\
 		ft_load_game.c\
 		ft_inputs.c\
 		ft_render_screen.c\
+		ft_raycasting.c\
 		ft_manage_block.c\
 		ft_manage_error.c\
 		ft_unit_test.c\
