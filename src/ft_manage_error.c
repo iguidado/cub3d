@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:23:00 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/26 03:39:29 by lescribe         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:27:46 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,16 @@ void	ft_print_error_map(int errnum, t_config *cfg, t_file_data *fdata)
 	if (errnum == ERROR_MAP_PLAYER_SPAWN)
 	{
 		if (cfg->spwn.pos.x == -1)
-			ft_putstr_fd("No player spawn specified on the map", 2);
+			ft_putendl_fd("No player spawn specified on the map", 2);
 		else
-			ft_putstr_fd("More than one player spawn on the map", 2);
+			ft_putendl_fd("More than one player spawn on the map", 2);
 	}
 	if (errnum == ERROR_MAP_OPEN_BOUNDARIES)
-		ft_putstr_fd("Open boundaries surrounding the map", 2);
+		ft_putendl_fd("Open boundaries surrounding the map", 2);
 	if (errnum == ERROR_MAP_EMPTY_LINE)
-		ft_putstr_fd("Empty line in middle of map", 2);
+		ft_putendl_fd("Empty line in middle of map", 2);
 	if (errnum == ERROR_MAP_BAD_TILE)
-		ft_putstr_fd("Bad tile inside the map", 2);
+		ft_putendl_fd("Bad tile inside the map", 2);
 }
 
 void	ft_manage_parse_error(int errnum, t_config *cfg, t_file_data *fdata)

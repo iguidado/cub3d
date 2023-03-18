@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:48:19 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/26 01:15:20 by lescribe         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:51:39 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	ft_add_map(t_config *cfg, t_file_data *fdata)
 	while (!ft_line_is_map(fdata->line))
 	{
 		free(fdata->line);
+		fdata->line = NULL;
 		ret = get_next_line(fdata->fd, &fdata->line);
 		if (ret == -1)
 			ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);

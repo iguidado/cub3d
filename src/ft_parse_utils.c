@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:30:31 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/14 16:56:09 by lescribe         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:40:51 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,18 @@ int	ft_str_is_colorcode(char *str)
 {
 	int	i_comma;
 	int	nbr;
+	int	dig;
 
 	i_comma = 0;
 	while (*str)
 	{
 		nbr = 0;
+		dig = 0;
 		while (*str >= '0' && *str <= '9')
 		{
 			nbr *= 10;
 			nbr += (*str - '0');
+			dig++;
 			str++;
 		}
 		if (*str == ',')
@@ -80,11 +83,10 @@ int	ft_str_is_colorcode(char *str)
 			str++;
 			i_comma++;
 		}
-		if (nbr > 255)
+		if (nbr > 255 || (dig == 0 || dig > 3))
 			return (0);
 	}
 	if (i_comma == 2)
 		return (1);
-	ft_putendl("HELLO THERE");
 	return (0);
 }
