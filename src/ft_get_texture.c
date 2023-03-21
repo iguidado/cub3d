@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 07:31:27 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/26 03:29:41 by lescribe         ###   ########.fr       */
+/*   Updated: 2023/03/21 08:22:37 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ int	ft_get_so_text(t_config *cfg, t_file_data *fdata)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	close(tmp_fd);
 	if (!ft_isxpm(fdata->paramlist[1]))
-	{
-		free(fdata->line);
 		ft_manage_parse_error(ERROR_XPM, cfg, fdata);
-	}
 	cfg->so_text = ft_strdup(fdata->paramlist[1]);
 	return (FLAG_SO);
 }

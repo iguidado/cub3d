@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/26 02:27:23 by lescribe         ###   ########.fr       */
+/*   Updated: 2023/03/21 08:58:14 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ t_img	ft_preset_img(t_config *cfg)
 {
 	t_img	new;
 	t_dot	res_max;
-	int		bpp;
-	int		linelen;
-	int		endian;
+	int		dum;
 
 	new.mlx_ptr = mlx_init();
 	if (!new.mlx_ptr)
@@ -105,7 +103,7 @@ t_img	ft_preset_img(t_config *cfg)
 			cfg->screen_height);
 	new.img_width = cfg->screen_width;
 	new.img_height = cfg->screen_height;
-	new.img_data = mlx_get_data_addr(new.img_ptr, &bpp, &linelen, &endian);
+	new.img_data = mlx_get_data_addr(new.img_ptr, &dum, &dum, &dum);
 	new.no_text = ft_load_text(&new, cfg->no_text);
 	new.so_text = ft_load_text(&new, cfg->so_text);
 	new.ea_text = ft_load_text(&new, cfg->ea_text);

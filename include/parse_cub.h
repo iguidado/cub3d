@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 03:22:06 by iguidado          #+#    #+#             */
-/*   Updated: 2022/12/27 03:22:07 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:14:45 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ typedef struct s_config
 
 enum
 {
-	ERROR_SYSCALL,
-	ERROR_FILE_END,
+	ERROR_SYSCALL, 
+	ERROR_FILE_END, 
 	ERROR_MISS_CONF,
 	ERROR_DUPLICATE,
 	ERROR_ID,

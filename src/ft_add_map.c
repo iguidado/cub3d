@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:48:19 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/18 18:51:39 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 09:35:45 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	ft_process_map(t_config *cfg, t_file_data *fdata)
 	int		x;
 	int		y;
 
+	fdata->line = NULL;
 	ft_equalize_row(&cfg->map);
 	y = 0;
 	while (cfg->map.data[y])
@@ -128,7 +129,7 @@ void	ft_process_map(t_config *cfg, t_file_data *fdata)
 	cfg->map.data[cfg->spwn.pos.y][cfg->spwn.pos.x] = '0';
 }
 
-void	ft_add_map(t_config *cfg, t_file_data *fdata)
+static void	ft_get_to_map(t_config *cfg, t_file_data *fdata)
 {
 	int			ret;
 
@@ -143,11 +144,19 @@ void	ft_add_map(t_config *cfg, t_file_data *fdata)
 			ft_manage_parse_error(ERROR_FILE_END, cfg, fdata);
 		fdata->line_nb++;
 	}
-	ft_add_row(&cfg->map.data, fdata->line);
+}
+
+
+void	ft_add_map(t_config *cfg, t_file_data *fdata)
+{
+	ft_get_to_map(cfg, fdata);
+	if (!ft_add_row(&cfg->map.data, fdata->line))
+		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	cfg->map.res.x = ft_strlen(fdata->line);
 	while (get_next_line(fdata->fd, &fdata->line))
 	{
-		ft_add_row(&cfg->map.data, fdata->line);
+		if (!ft_add_row(&cfg->map.data, fdata->line))
+			ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 		if (ft_strlen(fdata->line) > cfg->map.res.x)
 			cfg->map.res.x = ft_strlen(fdata->line);
 	}

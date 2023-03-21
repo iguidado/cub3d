@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:21 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/20 02:13:18 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 08:16:38 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ void	ft_wipe_file_data(t_file_data *data)
 	{
 		close(data->fd);
 		data->fd = -1;
+	}
+	if (data->line)
+	{
+		free(data->line);
+		data->line = NULL;
 	}
 	if (data->paramlist)
 	{
