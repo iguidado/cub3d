@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:30:31 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/21 13:55:39 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:15:34 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,9 @@ int	ft_str_is_colorcode(char *str)
 	{
 		nbr = 0;
 		dig = 0;
-		while (*str >= '0' && *str <= '9')
+		while (*str >= '0' && *str <= '9' && ++dig)
 		{
 			nbr = nbr * 10 + (*str - '0');
-			dig++;
 			str++;
 		}
 		if (*str == ',' && ++i_comma && ++str)

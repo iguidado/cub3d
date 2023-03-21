@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:48:50 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/21 08:58:14 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:16:47 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_img	ft_preset_img(t_config *cfg)
 
 	new.mlx_ptr = mlx_init();
 	if (!new.mlx_ptr)
-		exit(1);
+		exit((int)ft_putendl_fd("Error\nMlx Init failed !", 2));
 	mlx_get_screen_size(new.mlx_ptr, &res_max.y, &res_max.x);
 	if (res_max.y < cfg->screen_width)
 		cfg->screen_width = res_max.y;

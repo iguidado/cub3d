@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:38:45 by iguidado          #+#    #+#             */
-/*   Updated: 2020/04/23 19:16:22 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:18:44 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char					*ft_itoa(int n);
 */
 void					ft_putchar_fd(char c, int fd);
 void					ft_putstr_fd(char *s, int fd);
-void					ft_putendl_fd(char *s, int fd);
+int					ft_putendl_fd(char *s, int fd);
 void					ft_putnbr_fd(int n, int fd);
 
 /*

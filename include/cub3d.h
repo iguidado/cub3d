@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 11:38:30 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/20 21:19:50 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:40:30 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,16 @@ typedef struct s_ray_x
 	float	len;
 	float	test_x;
 	float	test_y;
+
+	float		len_x;
+	float		len_y;
+	float		deltaDistX;
+	float		deltaDistY;
+
+	int		side;
+
+	int		stepX;
+	int		stepY;
 }				t_ray_x;
 
 typedef struct s_ray

@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 02:52:27 by iguidado          #+#    #+#             */
-/*   Updated: 2022/12/27 02:57:55 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:59:02 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ bool	ft_strendby(char *str, char *end)
 	return (true);
 }
 
-bool	ft_isxpm(char *input)
+int	ft_isxpm(char *input)
 {
 	void	*ptr;
 	void	*xpm_ptr;
 	int		disc;
-	bool	ret;
+	int		ret;
 
-	ret = false;
+	ret = ERROR_XPM;
 	ptr = mlx_init();
 	if (!ptr)
-		return (false);
+		return (ERROR_SYSCALL);
 	xpm_ptr = mlx_xpm_file_to_image(ptr, input,
 			&disc, &disc);
 	if (xpm_ptr)
 	{
-		ret = true;
+		ret = 1;
 		mlx_destroy_image(ptr, xpm_ptr);
 	}
 	mlx_destroy_display(ptr);

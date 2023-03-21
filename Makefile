@@ -60,7 +60,7 @@ P_INC = $(addprefix $(D_INC)/, $(N_HDR))\
 
 # Compiler
 CC = clang
-WFLAG = -Wall -Werror -Wall -g
+WFLAG = -Wall -Werror -Wall
 DFLAG = -g3 -fsanitize=address
 INC_OBJ = -I$(D_INC) -I$(D_MLX) -I$(D_LIB)/include -I$(D_GNL)
 INC_FLAG = $(INC_OBJ) -lXext -lX11 -lbsd -lm

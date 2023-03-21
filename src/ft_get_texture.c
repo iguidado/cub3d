@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 07:31:27 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/21 08:22:37 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:10:08 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_get_no_text(t_config *cfg, t_file_data *fdata)
 {
 	int	tmp_fd;
+	int	ret;
 
 	if (cfg->mask & FLAG_NO)
 		ft_manage_parse_error(ERROR_DUPLICATE, cfg, fdata);
@@ -24,7 +25,10 @@ int	ft_get_no_text(t_config *cfg, t_file_data *fdata)
 	if ((tmp_fd) < 0)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	close(tmp_fd);
-	if (!ft_isxpm(fdata->paramlist[1]))
+	ret = ft_isxpm(fdata->paramlist[1]);
+	if (ret == ERROR_SYSCALL)
+		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
+	else if (ret == ERROR_XPM)
 		ft_manage_parse_error(ERROR_XPM, cfg, fdata);
 	cfg->no_text = ft_strdup(fdata->paramlist[1]);
 	return (FLAG_NO);
@@ -33,6 +37,7 @@ int	ft_get_no_text(t_config *cfg, t_file_data *fdata)
 int	ft_get_so_text(t_config *cfg, t_file_data *fdata)
 {
 	int	tmp_fd;
+	int	ret;
 
 	if (cfg->mask & FLAG_SO)
 		ft_manage_parse_error(ERROR_DUPLICATE, cfg, fdata);
@@ -42,7 +47,10 @@ int	ft_get_so_text(t_config *cfg, t_file_data *fdata)
 	if ((tmp_fd) < 0)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	close(tmp_fd);
-	if (!ft_isxpm(fdata->paramlist[1]))
+	ret = ft_isxpm(fdata->paramlist[1]);
+	if (ret == ERROR_SYSCALL)
+		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
+	else if (ret == ERROR_XPM)
 		ft_manage_parse_error(ERROR_XPM, cfg, fdata);
 	cfg->so_text = ft_strdup(fdata->paramlist[1]);
 	return (FLAG_SO);
@@ -51,6 +59,7 @@ int	ft_get_so_text(t_config *cfg, t_file_data *fdata)
 int	ft_get_we_text(t_config *cfg, t_file_data *fdata)
 {
 	int	tmp_fd;
+	int	ret;
 
 	if (cfg->mask & FLAG_WE)
 		ft_manage_parse_error(ERROR_DUPLICATE, cfg, fdata);
@@ -60,7 +69,10 @@ int	ft_get_we_text(t_config *cfg, t_file_data *fdata)
 	if ((tmp_fd) < 0)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	close(tmp_fd);
-	if (!ft_isxpm(fdata->paramlist[1]))
+	ret = ft_isxpm(fdata->paramlist[1]);
+	if (ret == ERROR_SYSCALL)
+		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
+	else if (ret == ERROR_XPM)
 		ft_manage_parse_error(ERROR_XPM, cfg, fdata);
 	cfg->we_text = ft_strdup(fdata->paramlist[1]);
 	return (FLAG_WE);
@@ -69,6 +81,7 @@ int	ft_get_we_text(t_config *cfg, t_file_data *fdata)
 int	ft_get_ea_text(t_config *cfg, t_file_data *fdata)
 {
 	int	tmp_fd;
+	int	ret;
 
 	if (cfg->mask & FLAG_EA)
 		ft_manage_parse_error(ERROR_DUPLICATE, cfg, fdata);
@@ -78,7 +91,10 @@ int	ft_get_ea_text(t_config *cfg, t_file_data *fdata)
 	if ((tmp_fd) < 0)
 		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
 	close(tmp_fd);
-	if (!ft_isxpm(fdata->paramlist[1]))
+	ret = ft_isxpm(fdata->paramlist[1]);
+	if (ret == ERROR_SYSCALL)
+		ft_manage_parse_error(ERROR_SYSCALL, cfg, fdata);
+	else if (ret == ERROR_XPM)
 		ft_manage_parse_error(ERROR_XPM, cfg, fdata);
 	cfg->ea_text = ft_strdup(fdata->paramlist[1]);
 	return (FLAG_EA);

@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:29:21 by iguidado          #+#    #+#             */
-/*   Updated: 2022/09/26 00:34:04 by lescribe         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:24:28 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_config	ft_get_config(t_file_data *fdata)
 	{
 		error_id = ft_get_next_param(fdata);
 		if ((error_id) >= 0)
-			ft_manage_parse_error(ERROR_ID, &cfg_new, fdata);
+			ft_manage_parse_error(error_id, &cfg_new, fdata);
 		cfg_new.mask |= ft_data_to_cfg(&cfg_new, fdata);
 	}
 	cfg_new.screen_width = WIDTH;

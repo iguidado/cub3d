@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 01:52:36 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/21 14:03:01 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:44:22 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_is_oob(t_map *map, float x, float y)
 {
 	if (x < 0.0f || y < 0.0f)
 		return (1);
-	if ((x) > (float)map->res.x || (y) > (float)map->res.y)
+	if ((x) >= (float)map->res.x || (y) >= (float)map->res.y)
 		return (1);
 	return (0);
 }

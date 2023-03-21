@@ -6,11 +6,24 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 02:54:31 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/21 02:32:38 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 22:34:11 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*	Simple set ray
+**
+**	float	leftmost_ray;
+**	float	x_normalized;
+**	
+**	leftmost_ray = (cub->one->angle - cub->one->fov / 2.0f);
+**	x_normalized = ((float)ray->x / (float)cub->cfg->screen_width);
+**	ray->angle = leftmost_ray + x_normalized * cub->one->fov;
+**	ray->eye_x = sin(ray->angle);
+**	ray->eye_y = cos(ray->angle);
+**	ray->len = 0.0f;
+*/
 
 void	ft_set_ray(t_prm_pkg *cub, t_ray_x *ray)
 {
@@ -23,28 +36,88 @@ void	ft_set_ray(t_prm_pkg *cub, t_ray_x *ray)
 	ray->eye_x = sin(ray->angle);
 	ray->eye_y = cos(ray->angle);
 	ray->len = 0.0f;
+	ray->test_x = (int)cub->one->x;
+	ray->test_y = (int)cub->one->y;
+	if (!ray->eye_x)
+		ray->deltaDistX = 1e30;
+	else
+		ray->deltaDistX = fabs(1/ ray->eye_x);
+	if (!ray->eye_y) 
+		ray->deltaDistY =  1e30;
+	else
+		ray->deltaDistY = fabs(1/ ray->eye_y);
+	if(ray->eye_x < 0)
+	{
+		ray->stepX = -1;
+		ray->len_x = (cub->one->x - (float)(int)cub->one->x) * ray->deltaDistX;
+	}
+	else
+	{
+		ray->stepX = 1;
+		ray->len_x = ((float)(int)cub->one->x + 1.0 - cub->one->x) * ray->deltaDistX;
+	}
+	if(ray->eye_y < 0)
+	{
+		ray->stepY = -1;
+		ray->len_y = (cub->one->y - (float)(int)cub->one->y) * ray->deltaDistY;
+	}
+	else
+	{
+		ray->stepY = 1;
+		ray->len_y = ((float)(int)cub->one->y + 1.0 - cub->one->y) * ray->deltaDistY;
+	}
 }
-
-/*
- ** need to implement DDA algorithm for 
- ** raycasting
- */
 
 int	ft_raycast(t_prm_pkg *cub, t_ray_x *ray)
 {
 	while (1)
 	{
-		ray->len += 0.001f;
-		ray->test_x = (int)(cub->one->x + ray->eye_x * ray->len);
-		ray->test_y = (int)(cub->one->y + ray->eye_y * ray->len);
+		if (ray->len_x < ray->len_y)
+		{
+			ray->len_x += ray->deltaDistX;
+			ray->test_x += ray->stepX;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->len_y += ray->deltaDistY;
+			ray->test_y += ray->stepY;
+			ray->side = 1;
+		}
 		if (ft_is_oob(&cub->cfg->map, ray->test_x, ray->test_y))
+		{
+			if (ray->side == 0)
+				ray->len = ray->len_x - ray->deltaDistX;
+			else
+				ray->len = ray->len_y - ray->deltaDistY;
 			return (0);
+		}
 		if (cub->cfg->map.data[(int)ray->test_y][(int)ray->test_x] == '1')
 		{
+			if (ray->side == 0)
+				ray->len = ray->len_x - ray->deltaDistX;
+			else
+				ray->len = ray->len_y - ray->deltaDistY;
 			return (1);
 		}
 	}
 }
+
+/*	Simple raycasting
+**
+**	while (1)
+**	{
+**		ray->len += 0.003f;
+**		ray->test_x = (cub->one->x + ray->eye_x * ray->len);
+**		ray->test_y = (cub->one->y + ray->eye_y * ray->len);
+**		if (ft_is_oob(&cub->cfg->map, ray->test_x, ray->test_y))
+**			return (0);
+**		ray->test_x = (int)ray->test_x;
+**		ray->test_y = (int)ray->test_y;
+**		if (cub->cfg->map.data[(int)ray->test_y][(int)ray->test_x] == '1')
+**			return (1);
+**	}
+*/
 
 void	ft_raycasting(t_prm_pkg *cub)
 {
