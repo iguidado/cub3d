@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:48:19 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/21 09:35:45 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:52:03 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ static void	ft_get_to_map(t_config *cfg, t_file_data *fdata)
 		fdata->line_nb++;
 	}
 }
-
 
 void	ft_add_map(t_config *cfg, t_file_data *fdata)
 {
