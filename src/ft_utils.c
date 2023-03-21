@@ -45,6 +45,8 @@ bool	ft_isxpm(char *input)
 
 	ret = false;
 	ptr = mlx_init();
+	if (!ptr)
+		return (false);
 	xpm_ptr = mlx_xpm_file_to_image(ptr, input,
 			&disc, &disc);
 	if (xpm_ptr)

@@ -19,7 +19,7 @@
 # define INTERIOR "0NESW"
 # define SPAWN "NESW"
 # define EXTERIOR " "
-# define ID_NB 8
+# define ID_NB 6
 
 enum
 {

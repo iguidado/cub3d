@@ -92,6 +92,8 @@ t_img	ft_preset_img(t_config *cfg)
 	int		endian;
 
 	new.mlx_ptr = mlx_init();
+	if (!new.mlx_ptr)
+		exit(1);
 	mlx_get_screen_size(new.mlx_ptr, &res_max.y, &res_max.x);
 	if (res_max.y < cfg->screen_width)
 		cfg->screen_width = res_max.y;

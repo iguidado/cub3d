@@ -34,7 +34,7 @@ int	ft_raycast(t_prm_pkg *cub, t_ray_x *ray)
 {
 	while (1)
 	{
-		ray->len += 0.001f;
+		ray->len += 0.01f;
 		ray->test_x = (int)(cub->one->x + ray->eye_x * ray->len);
 		ray->test_y = (int)(cub->one->y + ray->eye_y * ray->len);
 		if (ft_is_oob(&cub->cfg->map, ray->test_x, ray->test_y))

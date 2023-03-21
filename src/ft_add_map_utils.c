@@ -6,7 +6,7 @@
 /*   By: lescribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 16:48:43 by lescribe          #+#    #+#             */
-/*   Updated: 2022/09/26 01:15:23 by lescribe         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:10:53 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	ft_get_spawn(t_config *cfg, t_file_data *fdata, int x, int y)
 		cfg->spwn.pos.x = x;
 		if (cfg->map.data[y][x] == 'N')
 			cfg->spwn.angle = M_PI;
-		if (cfg->map.data[y][x] == 'E')
+		if (cfg->map.data[y][x] == 'W')
 			cfg->spwn.angle = M_PI / 2.0f;
 		if (cfg->map.data[y][x] == 'S')
 			cfg->spwn.angle = 0.0f;
-		if (cfg->map.data[y][x] == 'W')
+		if (cfg->map.data[y][x] == 'E')
 			cfg->spwn.angle = M_PI * (3.0f / 2.0f);
 	}
 }
