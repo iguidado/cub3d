@@ -6,7 +6,6 @@ Constante used : keysymdef.h
 
 - [x] fix Makefile relink error
 - [x] Norme and refactor
-- [ ] Fix pointed parsing error by Enestoffel
 
 - [ ] Implement DDA or at least fix wall bug
 
