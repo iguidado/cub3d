@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 10:24:55 by iguidado          #+#    #+#             */
-/*   Updated: 2019/11/20 02:26:13 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:46:01 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	int	ft_strchr_set(char c, char const *set)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!set)
@@ -30,7 +30,7 @@ static	int	ft_strchr_set(char c, char const *set)
 
 static	int	get_last_i(char const *s1, char const *set)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i])
@@ -41,7 +41,7 @@ static	int	get_last_i(char const *s1, char const *set)
 	return (i + 1);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		i;
 	int		last_i;
@@ -53,7 +53,8 @@ char		*ft_strtrim(char const *s1, char const *set)
 	while (ft_strchr_set(*s1, set))
 		s1++;
 	last_i = get_last_i(s1, set);
-	if (!(strtrimmed = (char *)malloc(sizeof(char) * (last_i + 1))))
+	strtrimmed = (char *)malloc(sizeof(char) * (last_i + 1));
+	if (!(strtrimmed))
 		return (NULL);
 	while (i < last_i)
 	{

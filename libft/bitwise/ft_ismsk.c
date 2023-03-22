@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 10:00:10 by iguidado          #+#    #+#             */
-/*   Updated: 2020/04/14 21:48:02 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:01:02 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	ft_ismsk(char *ref, char *tokens)
 {
-	char msk;
+	char	msk;
 
 	msk = 0;
 	if (!tokens || !ref)

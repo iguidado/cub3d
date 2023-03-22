@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 20:53:53 by iguidado          #+#    #+#             */
-/*   Updated: 2020/06/23 17:57:36 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:12:33 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	ft_nbrlen_itoa(int nbr)
 {
-	int length;
+	int	length;
 
-	length = (nbr < 0 ? 2 : 1);
+	length = 1 + (nbr < 0);
 	while (nbr < -9 || nbr > 9)
 	{
 		nbr = nbr / 10;
@@ -25,13 +25,14 @@ static int	ft_nbrlen_itoa(int nbr)
 	return (length);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*nbr_array;
 	int		i;
 
 	i = ft_nbrlen_itoa(n);
-	if (!(nbr_array = (char *)malloc(sizeof(char) * (i + 1))))
+	nbr_array = (char *)malloc(sizeof(char) * (i + 1));
+	if (!(nbr_array))
 		return (NULL);
 	nbr_array[0] = '0';
 	if (n < 0)
@@ -39,7 +40,10 @@ char		*ft_itoa(int n)
 	nbr_array[i] = '\0';
 	while (--i)
 	{
-		nbr_array[i] = (n < 0 ? (-1 * (n % 10)) + '0' : (n % 10) + '0');
+		if (n < 0)
+			nbr_array[i] = (-1 * (n % 10)) + '0';
+		else
+			nbr_array[i] = (n % 10) + '0';
 		n = n / 10;
 	}
 	if (!(nbr_array[0] == '-'))

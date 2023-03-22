@@ -6,7 +6,7 @@
 /*   By: iguidado <iguidado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 09:58:46 by iguidado          #+#    #+#             */
-/*   Updated: 2020/04/14 10:04:25 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:00:53 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	ft_isibit(char *ref, char token)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (ref[i])

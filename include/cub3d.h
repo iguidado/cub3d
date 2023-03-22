@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/16 11:38:30 by iguidado          #+#    #+#             */
-/*   Updated: 2023/03/21 20:40:30 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:22:13 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define KEY_RIGHT 65361
 # define KEY_ESC 65307
 
-# define PLAYER_SPEED 0.1f
+# define PLAYER_SPEED 0.05f
 
 # define KEY_PRESS 1
 # define KEY_RELEASE 2
@@ -125,15 +125,15 @@ typedef struct s_ray_x
 	float	test_x;
 	float	test_y;
 
-	float		len_x;
-	float		len_y;
-	float		deltaDistX;
-	float		deltaDistY;
+	float	len_x;
+	float	len_y;
+	float	delta_x;
+	float	delta_y;
 
 	int		side;
 
-	int		stepX;
-	int		stepY;
+	int		step_x;
+	int		step_y;
 }				t_ray_x;
 
 typedef struct s_ray
@@ -221,10 +221,19 @@ int			ft_prep_escape(t_prm_pkg *pkg);
 **	manipulation and raycasting
 */
 int			ft_render_screen(void *param);
-void		ft_raycasting(t_prm_pkg *cub);
-int			ft_raycast(t_prm_pkg *cub, t_ray_x *ray);
 void		ft_fill_height_void(t_config *cfg, t_img *img, t_ray_x *ray);
 void		ft_fill_height(t_prm_pkg *cub, t_ray_x *ray, t_block *block);
+
+/*
+**
+**
+*/
+
+void		ft_set_ray(t_prm_pkg *cub, t_ray_x *ray);
+void		ft_setup_raycast(t_prm_pkg *cub, t_ray_x *ray);
+int			ft_get_ray_len(t_ray_x	*ray, bool in_map);
+void		ft_raycasting(t_prm_pkg *cub);
+int			ft_raycast(t_prm_pkg *cub, t_ray_x *ray);
 
 /*
 **	ft_get_key : Manage hooked key

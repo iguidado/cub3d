@@ -1,0 +1,19 @@
+
+SO ./img/so.xpm
+WE ./img/west.xpm
+
+NO ./img/north.xpm            
+
+EA ./img/ea.xpm
+
+
+F 155,25,12
+
+C 00,00,00
+
+
+1111
+1001
+1N01
+1001
+1111

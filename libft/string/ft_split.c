@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 21:38:06 by iguidado          #+#    #+#             */
-/*   Updated: 2019/11/19 15:58:52 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:05:30 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_is_c(char symbol, char c)
 
 static int	ft_c_w(char *str, char c)
 {
-	int word;
+	int	word;
 
 	word = 0;
 	while (*str)
@@ -44,7 +44,8 @@ static char	*ft_word_dup(char *str, char c)
 	i = 0;
 	while (str[i] != c && str[i])
 		i++;
-	if (!(word = (char *)malloc(sizeof(char) * (i + 1))))
+	word = (char *)malloc(sizeof(char) * (i + 1));
+	if (!(word))
 		return (NULL);
 	word[i] = 0;
 	while (i-- > 0)
@@ -63,7 +64,7 @@ static void	*ft_clear_heap(char **wordlist, int index)
 	return (wordlist = NULL);
 }
 
-char		**ft_split(char *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**wordlist;
 	int		i;
@@ -71,7 +72,8 @@ char		**ft_split(char *s, char c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	if (!(wordlist = (char **)(malloc(sizeof(char *) * (ft_c_w(s, c) + 1)))))
+	wordlist = (char **)(malloc(sizeof(char *) * (ft_c_w(s, c) + 1)));
+	if (!(wordlist))
 		return (NULL);
 	while (*s)
 	{
@@ -79,10 +81,9 @@ char		**ft_split(char *s, char c)
 			s++;
 		if (!ft_is_c(*s, c) && *s)
 		{
-			if (!(wordlist[i] = ft_word_dup(s, c)))
-			{
+			wordlist[i] = ft_word_dup(s, c);
+			if (!(wordlist))
 				return (ft_clear_heap(wordlist, i));
-			}
 			i++;
 		}
 		while (!ft_is_c(*s, c) && *s)

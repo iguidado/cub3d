@@ -6,14 +6,14 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 10:01:25 by iguidado          #+#    #+#             */
-/*   Updated: 2019/11/26 18:03:51 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:01:14 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_atoi(const char *str)
 {
-	int sign;
-	int nbr;
+	int	sign;
+	int	nbr;
 
 	sign = 1;
 	nbr = 0;
