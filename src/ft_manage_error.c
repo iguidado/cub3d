@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:23:00 by iguidado          #+#    #+#             */
-/*   Updated: 2020/07/11 07:32:45 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:20:14 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@
 
 void	ft_print_error_file(int errnum, t_config *cfg, t_file_data *fdata)
 {
-	unsigned char finished_process_mask;
-
-	finished_process_mask = 0;
 	if (errnum == ERROR_MISS_CONF)
 		ft_putendl_fd(" : missing configuration line", 2);
 	if (errnum == ERROR_FILE_END)
@@ -54,7 +51,7 @@ void	ft_print_error_file(int errnum, t_config *cfg, t_file_data *fdata)
 
 void	ft_print_error_id(int errnum, t_config *cfg, t_file_data *fdata)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = ft_itoa(fdata->line_nb);
 	ft_putstr_fd("Line [", 2);
@@ -78,7 +75,7 @@ void	ft_print_error_id(int errnum, t_config *cfg, t_file_data *fdata)
 
 void	ft_print_error_token(int errnum, t_config *cfg, t_file_data *fdata)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = ft_itoa(fdata->line_nb);
 	ft_putstr_fd("Line [", 2);
@@ -91,6 +88,8 @@ void	ft_print_error_token(int errnum, t_config *cfg, t_file_data *fdata)
 		ft_putendl_fd(" : Bad number of argument written", 2);
 	else if (errnum == ERROR_LEXICAL)
 		ft_putendl_fd(" : Bad type of argument given", 2);
+	else if (errnum == ERROR_XPM)
+		ft_putendl_fd(" : File is not xpm", 2);
 }
 
 void	ft_print_error_map(int errnum, t_config *cfg, t_file_data *fdata)
@@ -98,30 +97,34 @@ void	ft_print_error_map(int errnum, t_config *cfg, t_file_data *fdata)
 	if (errnum == ERROR_MAP_PLAYER_SPAWN)
 	{
 		if (cfg->spwn.pos.x == -1)
-			ft_putstr_fd("No player spawn specified on the map", 2);
+			ft_putendl_fd("No player spawn specified on the map", 2);
 		else
-			ft_putstr_fd("More than one player spawn on the map", 2);
+			ft_putendl_fd("More than one player spawn on the map", 2);
 	}
 	if (errnum == ERROR_MAP_OPEN_BOUNDARIES)
-		ft_putstr_fd("Open boundaries surrounding the map", 2);
+		ft_putendl_fd("Open boundaries surrounding the map", 2);
 	if (errnum == ERROR_MAP_EMPTY_LINE)
-		ft_putstr_fd("Empty line in middle of map", 2);
+		ft_putendl_fd("Empty line in middle of map", 2);
 	if (errnum == ERROR_MAP_BAD_TILE)
-		ft_putstr_fd("Bad tile inside the map", 2);
+		ft_putendl_fd("Bad tile inside the map", 2);
 }
 
 void	ft_manage_parse_error(int errnum, t_config *cfg, t_file_data *fdata)
 {
-	char			*tmp;
-	static void		(*error_ft[])(int, t_config *, t_file_data *) =
-	{ &ft_print_error_file, &ft_print_error_id,
-		&ft_print_error_token, &ft_print_error_map };
+	static void		(*error_ft[])(int, t_config *, t_file_data *)
+		= {&ft_print_error_file, &ft_print_error_id,
+		&ft_print_error_token, &ft_print_error_map};
 
 	ft_putendl_fd("Error", 2);
 	if (errnum == ERROR_SYSCALL)
 	{
-		ft_putendl_fd(strerror(errno), 2);
+		if (!errno)
+			ft_putendl_fd("Mlx init failed !", 2);
+		else
+			ft_putendl_fd(strerror(errno), 2);
 	}
+	else if (errnum == ERROR_XPM)
+		error_ft[2](errnum, cfg, fdata);
 	else if (errnum >= ERROR_MAP_PLAYER_SPAWN)
 		error_ft[3](errnum, cfg, fdata);
 	else

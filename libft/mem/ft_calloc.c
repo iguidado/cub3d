@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 10:03:39 by iguidado          #+#    #+#             */
-/*   Updated: 2019/11/26 18:02:41 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:07:46 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	*ft_calloc(size_t count, size_t size)
 
 	if (!count || !size)
 		return (newstr = (char *)malloc(1));
-	if (!(newstr = (char *)malloc(count * size)))
+	newstr = (char *)malloc(count * size);
+	if (!(newstr))
 		return (NULL);
 	i = 0;
 	while (i < count * size)

@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 10:23:50 by iguidado          #+#    #+#             */
-/*   Updated: 2019/11/26 15:57:58 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:45:19 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	int	ft_substr_equ(const char *substr, const char *needle, size_t len)
 	return (0);
 }
 
-char		*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	if (!*needle)
 		return ((char *)haystack);

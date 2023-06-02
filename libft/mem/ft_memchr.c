@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:53:51 by iguidado          #+#    #+#             */
-/*   Updated: 2019/11/26 18:04:44 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:56:35 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char *s_trlt;
+	unsigned char	*s_trlt;
 
 	s_trlt = (unsigned char *)s;
 	while (n)

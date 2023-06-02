@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/09 18:44:16 by iguidado          #+#    #+#             */
-/*   Updated: 2020/05/09 18:45:11 by iguidado         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:33:57 by lescribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 void	ft_print_cfg(t_config *cfg)
 {
 	printf("|%8s|%8s|%8s|%8s|%8s|%8s|%8s|%8s|%8s|\n",
-			"mask", "s_width", "s_height", "ceilar_c", "floor_c"
-			"no_text", "so_text", "ea_text", "we_text", "spri_text");
+		"mask", "s_width", "s_height", "ceilar_c", "floor_c"
+		"no_text", "so_text", "ea_text", "we_text", "spri_text");
 	printf("|%8i|%8i|%8i|%8x|%8x|%8s|%8s|%8s|%8s|%8s\n\n",
-			cfg->mask, cfg->screen_width, cfg->screen_height,
-			cfg->ceilar_color, cfg->floor_color,
-			cfg->no_text, cfg->so_text, cfg->ea_text,
-			cfg->we_text, cfg->spri_text);
+		cfg->mask, cfg->screen_width, cfg->screen_height,
+		cfg->ceilar_color, cfg->floor_color,
+		cfg->no_text, cfg->so_text, cfg->ea_text,
+		cfg->we_text, cfg->spri_text);
 	if (cfg->map.data)
 		ft_print_tab(cfg->map.data);
 }
@@ -35,13 +35,13 @@ void	ft_print_fdata(t_file_data *fdata)
 
 void	ft_print_obj(t_obj_spwn *obj_list)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (obj_list)
 	{
-		printf("obj no %i  x = %i, y = %i\n"
-				, i, obj_list->pos.x, obj_list->pos.y);
+		printf("obj no %i  x = %i, y = %i\n",
+			i, obj_list->pos.x, obj_list->pos.y);
 		obj_list = obj_list->next;
 		i++;
 	}

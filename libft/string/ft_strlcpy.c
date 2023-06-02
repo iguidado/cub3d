@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 10:10:55 by iguidado          #+#    #+#             */
-/*   Updated: 2019/11/20 00:06:55 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:06:46 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 {
-	size_t trying_to_cpy;
+	size_t	trying_to_cpy;
 
 	if (!src)
 		return (0);

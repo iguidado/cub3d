@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:56:57 by iguidado          #+#    #+#             */
-/*   Updated: 2019/11/05 13:57:29 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:55:30 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char *s1_tmp;
-	unsigned char *s2_tmp;
+	unsigned char	*s1_tmp;
+	unsigned char	*s2_tmp;
 
 	if (!n)
 		return (0);

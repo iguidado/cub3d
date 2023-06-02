@@ -6,15 +6,15 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 18:02:29 by iguidado          #+#    #+#             */
-/*   Updated: 2020/06/23 18:03:05 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:08:05 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isindex(const char *set, char c)
+int	ft_isindex(const char *set, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (set[i])

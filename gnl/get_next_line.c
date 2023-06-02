@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 00:08:35 by iguidado          #+#    #+#             */
-/*   Updated: 2020/01/18 00:15:57 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:13:48 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	get_next_line(int fd, char **line)
 	ret = 0;
 	while (!ft_dump_line(buff, line))
 	{
-		if ((ret = read(fd, buff, BUFFER_SIZE)) < 1)
+		ret = read(fd, buff, BUFFER_SIZE);
+		if ((ret) < 1)
 		{
 			if (ret == -1)
 			{

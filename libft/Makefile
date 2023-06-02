@@ -6,7 +6,7 @@
 #    By: iguidado <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/18 11:15:40 by iguidado          #+#    #+#              #
-#    Updated: 2020/04/23 17:57:55 by iguidado         ###   ########.fr        #
+#    Updated: 2023/03/22 16:15:24 by iguidado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,7 @@ S_OUT	=	ft_putchar.c\
 		ft_putendl_fd.c\
 		ft_putnbr.c\
 		ft_putnbr_fd.c\
-		ft_putnbr_base.c\
-		ft_putstr_non_printable.c\
-		ft_print_memory.c 
+		ft_putstr_non_printable.c
 
 S_MEM	= 	ft_memset.c \
 		ft_bzero.c \
@@ -51,12 +49,9 @@ S_STR	=	ft_strlen.c \
 		ft_strrchr.c \
 		ft_strncmp.c \
 		ft_strlcpy.c \
-		ft_strlcat.c \
 		ft_strnstr.c \
 		ft_strtrim.c \
 		ft_strdup.c \
-		ft_substr.c \
-		ft_strjoin.c \
 		ft_split.c \
 		ft_strmapi.c 
 
@@ -80,7 +75,6 @@ S_LST =		ft_lstnew.c \
 		ft_lstadd_back.c \
 		ft_lstdelone.c \
 		ft_lstclear.c \
-		ft_lstmap.c \
 		ft_lstiter.c 
 
 S_TAB	=	ft_print_tab.c\

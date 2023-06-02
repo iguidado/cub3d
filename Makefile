@@ -10,21 +10,22 @@ N_MAIN_TEST = unit_test.c
 
 
 N_SRC = main.c\
-		ft_export_bmp.c\
 		ft_preset_struct.c\
 		ft_parse_cub.c\
 		ft_parse_utils.c\
 		ft_get_num_value.c\
 		ft_get_texture.c\
 		ft_add_map.c\
+		ft_add_map_utils.c\
 		ft_map_analysis.c\
 		ft_load_game.c\
 		ft_inputs.c\
 		ft_render_screen.c\
+		ft_raycasting.c\
 		ft_manage_block.c\
 		ft_manage_error.c\
-		ft_manage_obj.c\
 		ft_unit_test.c\
+		ft_utils.c\
 		ft_wipe.c
 
 #	ft_unit_test.c\
@@ -62,24 +63,25 @@ CC = clang
 WFLAG = -Wall -Werror -Wall
 DFLAG = -g3 -fsanitize=address
 INC_OBJ = -I$(D_INC) -I$(D_MLX) -I$(D_LIB)/include -I$(D_GNL)
-INC_FLAG = $(INC_OBJ) -lXext -lX11 -lbsd
-FLAGS = $(WFLAG) $(DFLAG)
+INC_FLAG = $(INC_OBJ) -lXext -lX11 -lbsd -lm
+FLAGS = $(WFLAG)
+#FLAGS += $(DFLAG)
 
-all : $(NAME)
+all : $(P_LIB) $(P_MLX) $(P_GNL) $(NAME)
 
-$(NAME) : $(P_OBJ) $(N_LIB) $(N_MLX) $(N_GNL)
+$(NAME) : $(P_OBJ) $(P_LIB) $(P_MLX) $(P_GNL)
 	$(CC) -o $(NAME) $(FLAGS) $(P_OBJ) $(INC_FLAG) $(P_LIB) $(P_MLX) $(P_GNL)
 
 %.o : %.c $(P_INC)
-	$(CC) $(INC_OBJ) -o $@ -c $<
+	$(CC) $(FLAGS) $(INC_OBJ) -o $@ -c $<
 
-$(N_LIB) : $(D_LIB)
+$(P_LIB) : $(D_LIB)
 	make -C $(D_LIB)
 
-$(N_MLX) : $(D_MLX)
+$(P_MLX) : $(D_MLX)
 	make -C $(D_MLX)
 
-$(N_GNL) : $(D_GNL)
+$(P_GNL) : $(D_GNL)
 	make -C $(D_GNL)
 
 clean :

@@ -6,7 +6,7 @@
 /*   By: iguidado <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 22:40:54 by iguidado          #+#    #+#             */
-/*   Updated: 2020/02/07 22:59:36 by iguidado         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:06:33 by iguidado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	ft_printhex(unsigned char c)
 	write(1, &"0123456789abcdef"[c % 16], 1);
 }
 
-void		ft_putstr_non_printable(char *str)
+void	ft_putstr_non_printable(char *str)
 {
-	unsigned char c;
+	unsigned char	c;
 
 	while (*str)
 	{
