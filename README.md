@@ -1,3 +1,7 @@
+# Cub3D
+
+**!** Le projet n'est stable que sur la branche stable pour l'instant
+
 ## Description
 Cub3D est un projet de l'école 42 qui consiste à créer un moteur de jeu 3D basique en utilisant la technique de raycasting. Le projet s'inspire du jeu Wolfenstein 3D et a pour objectif de renforcer les compétences en programmation graphique, en gestion des événements, et en mathématiques appliquées à la 3D.
 
