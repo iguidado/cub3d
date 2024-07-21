@@ -34,10 +34,10 @@ make install && make
 
 ## Exemples d'Utilisation
 ### Contrôle du Jeu
-- *W *: Avancer
-- *S *: Reculer
-- *A *: Déplacer à gauche
-- *D *: Déplacer à droite
-- *Flèche Gauche *: Tourner la caméra à gauche
-- *Flèche Droite *: Tourner la caméra à droite
-- *ESC *: Quitter le jeu
+- *W* : Avancer
+- *S* : Reculer
+- *A* : Déplacer à gauche
+- *D* : Déplacer à droite
+- *Flèche Gauche* : Tourner la caméra à gauche
+- *Flèche Droite* : Tourner la caméra à droite
+- *ESC* : Quitter le jeu
